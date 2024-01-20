@@ -83,9 +83,10 @@ const findAll = async (req, res) => {
 
     const result = Object.keys(menuGroup).map(key => {
       return {
+        // idRestaurantByType: menuGroup[key][0].idRestaurant,
         title: key,
-        data: menuGroup[key]
-      };
+        data: menuGroup[key],
+      }
     });
 
     res.send({

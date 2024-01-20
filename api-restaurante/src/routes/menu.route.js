@@ -1,10 +1,9 @@
 import { Router } from "express"
 const router = Router()
-
-import { create, findAll } from "../controllers/menu.controller.js"
 import { authMiddleware } from "../middlewares/auth.middleware.js"
+import { create, findAll } from "../controllers/menu.controller.js"
 
 router.post("/", authMiddleware, create)
-router.get("/", findAll)
+router.get("/", authMiddleware, findAll)
 
 export default router

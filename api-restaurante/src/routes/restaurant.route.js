@@ -1,9 +1,9 @@
 import { Router } from "express";
 const router = Router();
-
+import { authMiddleware } from "../middlewares/auth.middleware.js"
 import { create, findAll } from "../controllers/restaurant.controller.js";
 
-router.post("/", create);
-router.get("/", findAll);
+router.post("/", authMiddleware, create)
+router.get("/", authMiddleware, findAll)
 
 export default router;

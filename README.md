@@ -23,19 +23,19 @@ Informações do desafio:
 Suponha que você tenha sido solicitado a desenvolver uma plataforma no ramo de gastronomia. O cliente solicitou um MVP para validar seu conhecimento, 
 com as seguintes características:
 
-• Um portal WEB responsivo ou aplicativo mobile;
-• Autenticação por e-mail e senha criptografados;
-• Tela inicial com uma lista dos restaurantes;
-• A tela deve possuir um campo de busca livre, que filtra os restaurantes cujo NOME DO RESTAURANTE, NOME E DESCRIÇÃO DO PRATO possuam os caracteres digitados;
-• Ao clicar em um restaurante na lista, a plataforma deve ir para a tela de detalhe do restaurante e cardápio;
-• Tela com detalhe do restaurante, mostrando nome, telefone e endereço, além da lista de itens do cardápio (nome, descrição e preço)
+- Um portal WEB responsivo ou aplicativo mobile;
+-  Autenticação por e-mail e senha criptografados;
+- Tela inicial com uma lista dos restaurantes;
+- A tela deve possuir um campo de busca livre, que filtra os restaurantes cujo NOME DO RESTAURANTE, NOME E DESCRIÇÃO DO PRATO possuam os caracteres digitados;
+- Ao clicar em um restaurante na lista, a plataforma deve ir para a tela de detalhe do restaurante e cardápio;
+- Tela com detalhe do restaurante, mostrando nome, telefone e endereço, além da lista de itens do cardápio (nome, descrição e preço)
 
 Desenvolva o MVP solicitado, em qualquer tecnologia, respeitando os seguintes critérios: 
 
-✓ Portal ou aplicativo; 
-✓ Tela de login e autenticação (criar um usuário "fred@graodireto.com.br e senha "123Fred"); 
-✓ Backend respondendo a chamadas API REST; 
-✓ Repositório de dados contendo informações dos usuários, restaurantes e itens do cardápio;
+- Portal ou aplicativo; 
+- Tela de login e autenticação (criar um usuário "fred@graodireto.com.br e senha "123Fred"); 
+- Backend respondendo a chamadas API REST; 
+- Repositório de dados contendo informações dos usuários, restaurantes e itens do cardápio;
 
 
 <h2 align="center">Abaixo está o exemplo enviado no desafio</h2>
@@ -78,11 +78,11 @@ Foi utilizado o Mongo Atlas, que alem de ser o banco MongoDB ele já fica em nuv
   
 O backend foi desenvolvido utilizando NodeJS, Express e o JWT para proteção de rotas. O projeto foi publicado no Rende, plataforma para fazer deploy com Node e nelepossui as seguintes requisições/end points:
 
-✓ Criar usuário, alterar, buscar todos os usuário e buscar um usuário por ID.
-✓ Autenticação,
-✓ Cadastrar restaurante e buscar todos os restaurantes.
-✓ Cadastrar cardápio vinculando um restaurante, buscar todos os cardápios, buscar cardápio por ID.
-✓ Buscar os cardápios por ID de um restaurante e apagar cardapios.
+- Criar usuário, alterar, buscar todos os usuário e buscar um usuário por ID.
+- Autenticação,
+- Cadastrar restaurante e buscar todos os restaurantes.
+- Cadastrar cardápio vinculando um restaurante, buscar todos os cardápios, buscar cardápio por ID.
+- Buscar os cardápios por ID de um restaurante e apagar cardapios.
 
 
 Foi criada a documentação de todos os end points pelo [Swagger](https://api-restaurant-scxy.onrender.com/documentation/), já com exemplos para utilizar e implantar o back end, e também está publicada.
@@ -133,5 +133,5 @@ Entre em contato!
 
 [![Github Badge](https://img.shields.io/badge/-Github-000?style=flat-square&logo=Github&logoColor=white&link=link_do_seu_perfil_no_github)](https://github.com/diegohfcelestino)
 [![Linkedin Badge](https://img.shields.io/badge/-LinkedIn-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/diego-ferreira-34b6348b/)](https://www.linkedin.com/in/diegohfcelestino/)
-[![Whatsapp Badge](https://img.shields.io/badge/-Whatsapp-4CA143?style=flat-square&labelColor=4CA143&logo=whatsapp&logoColor=white&link=https://api.whatsapp.com/send?phone=+5516991187434&text=Hello!)](https://api.whatsapp.com/send?phone=+551693535938&text=Hello!)
+[![Whatsapp Badge](https://img.shields.io/badge/-Whatsapp-4CA143?style=flat-square&labelColor=4CA143&logo=whatsapp&logoColor=white&link=https://api.whatsapp.com/send?phone=+5516991187434&text=Hello!)](https://api.whatsapp.com/send?phone=+5516993535938&text=Hello!)
 [![Gmail Badge](https://img.shields.io/badge/-Gmail-c14438?style=flat-square&logo=Gmail&logoColor=white&link=mailto:diegohfcelestino@gmail.com)](mailto:diegohfcelestino@gmail.com)

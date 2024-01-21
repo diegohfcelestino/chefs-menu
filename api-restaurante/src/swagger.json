@@ -61,15 +61,469 @@
         }
       }
     },
-    "/user/": {},
-    "/user/{id}/": {},
-    "/user/{id}": {},
-    "/auth/": {},
-    "/restaurant/": {},
-    "/restaurant": {},
-    "/menu/": {},
-    "/menu": {},
-    "/restaurant/{idRestaurant}/": {}
+    "/user/": {
+      "get": {
+        "summary": "Buscar todos usuários",
+        "description": "Rota responsável por buscar todos os usuários cadastrados",
+        "tags": [
+          "Users"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          },
+          "400": {
+            "description": "Not Found"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/{id}/": {
+      "get": {
+        "summary": "Buscar usuário por id",
+        "description": "Rota responsável por buscar o usuário cadastro pelo seu id.",
+        "tags": [
+          "Users"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "string",
+            "description": "ID do usuário",
+            "required": true
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          },
+          "400": {
+            "description": "Not Found"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/{id}": {
+      "patch": {
+        "summary": "Atualizar usuário por id",
+        "description": "Rota responsável por atualizar o usuário por id",
+        "tags": [
+          "Users"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "string",
+            "description": "ID do usuário",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              },
+              "examples": {
+                "Users": {
+                  "value": {
+                    "name": "Admin Teste"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          },
+          "400": {
+            "description": "Not Found"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/": {
+      "post": {
+        "summary": "Login do usuário",
+        "description": "Rota responsável por logar e registrar o token do usuário",
+        "tags": [
+          "Auth"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              },
+              "examples": {
+                "Users": {
+                  "value": {
+                    "email": "admin@admin.com.br",
+                    "password": "1234567"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Not Found"
+          },
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/restaurant/": {
+      "post": {
+        "summary": "Cadastrar Restaurante",
+        "description": "Rota responsável por cadastrar um novo restaurante",
+        "tags": [
+          "Restaurant"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Restaurant"
+              },
+              "examples": {
+                "Restaurant": {
+                  "value": {
+                    "name": "Restaurante Teste",
+                    "slogan": "Melhores pratos da cidade",
+                    "avatar": "https://plus.unsplash.com/premium_photo-1686090448301-4c453ee74718?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                    "background": "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                    "score": 5,
+                    "deliveryTime": "20m - 60m",
+                    "deliveryValue": "5,00",
+                    "telephone": "(16) 99999-999",
+                    "address": "Rua: Cinquenta, 100 - Centro, Franca SP",
+                    "km": 15
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          },
+          "400": {
+            "description": "Not Found"
+          },
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Restaurant"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/restaurant": {
+      "get": {
+        "summary": "Buscar todos os restaurantes",
+        "description": "Rota responsável por buscar todos os restaurantes e listar por km de distancia do menor para o maior",
+        "tags": [
+          "Restaurant"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Not Found"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Restaurant"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/menu/": {
+      "post": {
+        "summary": "Cadastrar pratos do cardápio",
+        "description": "Rota responsável por cadastrar um novo prato do cardápio de um restaurante",
+        "tags": [
+          "Menu"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Menu"
+              },
+              "examples": {
+                "Menu": {
+                  "value": {
+                    "type": "Pratos",
+                    "name": "Prato teste",
+                    "description": "Arroz, feijão, carne",
+                    "background": "https://images.unsplash.com/photo-1658562412479-4bfd84dda0c2?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                    "value": "15,00",
+                    "restaurant": "65ad472869b584e248b47c03"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          },
+          "400": {
+            "description": "Not Found"
+          },
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Menu"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/menu": {
+      "get": {
+        "summary": "Buscar todos os cardápios",
+        "description": "Rota responsável por buscar todos os cardápios cadastrados, independente do restaurante",
+        "tags": [
+          "Menu"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Not Found"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Menu"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/menu/idRestaurant/{id}/": {
+      "get": {
+        "summary": "Buscar cardápio por id do restaurante",
+        "description": "Rota responsável por buscar os cardápios de um restaurante por id do restaurante.",
+        "tags": [
+          "Menu"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "string",
+            "description": "ID do restaurante",
+            "required": true
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          },
+          "400": {
+            "description": "Not Found"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Menu"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/menu/{id}/": {
+      "get": {
+        "summary": "Buscar cardápio por id",
+        "description": "Rota responsável por buscar o cardápio pelo seu id.",
+        "tags": [
+          "Menu"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "string",
+            "description": "ID do cardápio",
+            "required": true
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          },
+          "400": {
+            "description": "Not Found"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Menu"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/menu/{id}": {
+      "delete": {
+        "summary": "Deletar cardápio",
+        "description": "Rota responsável por deletar um cardápio pelo seu id",
+        "tags": [
+          "Menu"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "string",
+            "description": "Id do cardápio",
+            "required": true
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          },
+          "400": {
+            "description": "Not Found"
+          },
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
   },
   "components": {
     "securitySchemes": {

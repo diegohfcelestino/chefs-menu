@@ -219,6 +219,10 @@ const erase = async (req, res) => {
     const { id } = req.params;
     const menu = await findByIdService(id);
 
+    if (menu.length === 0) {
+      return res.status(400).send({ message: "Não há nenhum menu cadastrado com este id." });
+    }
+
     await eraseService(id);
 
     return res.send({ message: "Menu deletado com sucesso" });

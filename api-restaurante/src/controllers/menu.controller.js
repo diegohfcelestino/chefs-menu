@@ -2,8 +2,10 @@ import {
   createService,
   findAllService,
   findByIdService,
-  countMenus
+  countMenus,
+  countMenusById,
 } from "../services/menu.service.js";
+
 const create = async (req, res) => {
   try {
     const { type, name, description, background, value, restaurant } = req.body;
@@ -86,7 +88,7 @@ const findAll = async (req, res) => {
         // idRestaurantByType: menuGroup[key][0].idRestaurant,
         title: key,
         data: menuGroup[key],
-      }
+      };
     });
 
     res.send({
@@ -102,4 +104,51 @@ const findAll = async (req, res) => {
   }
 };
 
-export { create, findAll };
+const findById = async (req, res) => {
+  try {
+    const { idRestaurant } = req.params;
+    const menu = await findByIdService(idRestaurant);
+    const total = await countMenusById(idRestaurant);
+
+    if (menu.length === 0) {
+      return res.status(400).send({ message: "Não há menu cadastrado neste Restaurante" });
+    }
+
+    const menuGroup = menu.map((item) => ({
+      id: item._id,
+      type: item.type,
+      name: item.name,
+      description: item.description,
+      background: item.background,
+      value: item.value,
+      idRestaurant: item.restaurant._id,
+      nameRestaurant: item.restaurant.name,
+      backgroundRestaurant: item.restaurant.background,
+      avatarRestaurant: item.restaurant.avatar,
+      scoreRestaurant: item.restaurant.score,
+      telephoneRestaurant: item.restaurant.telephone,
+
+    })).reduce((group, menu) => {
+      const { type } = menu;
+      group[type] = group[type] ?? [];
+      group[type].push(menu);
+      return group;
+    }, {});
+
+
+
+    const result = Object.keys(menuGroup).map(key => {
+      return {
+        title: key,
+        data: menuGroup[key],
+      };
+    });
+
+    return res.send({ total, result });
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+};
+
+
+export { create, findAll, findById };

@@ -377,13 +377,25 @@
     "/menu": {
       "get": {
         "summary": "Buscar todos os cardápios",
-        "description": "Rota responsável por buscar todos os cardápios cadastrados, independente do restaurante",
+        "description": "Rota responsável por buscar todos os cardápios cadastrados, independente do restaurante, possui parametros para paginação como limit e skip",
         "tags": [
           "Menu"
         ],
         "security": [
           {
             "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "limit",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "skip",
+            "type": "string"
           }
         ],
         "responses": {

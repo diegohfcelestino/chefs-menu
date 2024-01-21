@@ -5,8 +5,8 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "start": "node index",
-    "dev": "nodemon index"
+    "start": "node --no-warnings server.js",
+    "dev": "nodemon --no-warnings server.js "
   },
   "keywords": [],
   "author": "Diego",

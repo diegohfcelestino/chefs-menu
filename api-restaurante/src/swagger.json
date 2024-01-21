@@ -10,6 +10,10 @@
   },
   "servers": [
     {
+      "url": "https://api-restaurant-scxy.onrender.com",
+      "description": "External Server"
+    },
+    {
       "url": "http://localhost:3000",
       "description": "Local Server"
     }

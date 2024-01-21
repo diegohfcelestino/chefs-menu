@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
-const connectDataBase = () => {
-  console.log("Aguarde, conectando ao banco de dados")
+const connectDatabase = () => {
+  console.log("Aguarde, conectando ao banco de dados");
 
   mongoose
     .connect(
@@ -9,7 +9,7 @@ const connectDataBase = () => {
     { useNewUrlParser: true, useUnifiedTopology: true } */
     )
     .then(() => console.log("Conectado ao Mongo DB Atlas"))
-    .catch((error) => console.log(error))
-}
+    .catch((error) => console.log(error));
+};
 
-export default connectDataBase;
+export default connectDatabase;

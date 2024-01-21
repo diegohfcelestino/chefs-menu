@@ -2,7 +2,7 @@
   "name": "api-restaurante",
   "version": "1.0.0",
   "description": "API para o desafio tecnico da Grão Direto",
-  "main": "index.js",
+  "main": "server.js",
   "type": "module",
   "scripts": {
     "start": "node index",

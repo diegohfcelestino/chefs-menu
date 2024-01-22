@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const connectDatabase = () => {
+export const connectDatabase = () => {
   console.log("Aguarde, conectando ao banco de dados");
 
   mongoose
@@ -12,4 +12,3 @@ const connectDatabase = () => {
     .catch((error) => console.log(error));
 };
 
-export default connectDatabase;

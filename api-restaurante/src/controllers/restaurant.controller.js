@@ -1,9 +1,6 @@
-import {
-  createService,
-  findAllService,
-  findByIdService,
-} from "../services/restaurant.service.js";
-const create = async (req, res) => {
+import { createService, findAllService } from "../services/restaurant.service.js";
+
+export const create = async (req, res) => {
   try {
     const { name, slogan, avatar, background, score, deliveryTime, deliveryValue, telephone, address, km } = req.body;
 
@@ -32,7 +29,7 @@ const create = async (req, res) => {
 };
 
 
-const findAll = async (req, res) => {
+export const findAll = async (req, res) => {
   try {
     const restaurants = await findAllService();
 
@@ -45,5 +42,3 @@ const findAll = async (req, res) => {
     res.status(500).send({ message: err.message });
   }
 };
-
-export { create, findAll };

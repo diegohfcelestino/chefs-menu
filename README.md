@@ -24,7 +24,7 @@ Suponha que você tenha sido solicitado a desenvolver uma plataforma no ramo de 
 com as seguintes características:
 
 - Um portal WEB responsivo ou aplicativo mobile;
--  Autenticação por e-mail e senha criptografados;
+- Autenticação por e-mail e senha criptografados;
 - Tela inicial com uma lista dos restaurantes;
 - A tela deve possuir um campo de busca livre, que filtra os restaurantes cujo NOME DO RESTAURANTE, NOME E DESCRIÇÃO DO PRATO possuam os caracteres digitados;
 - Ao clicar em um restaurante na lista, a plataforma deve ir para a tela de detalhe do restaurante e cardápio;
@@ -76,16 +76,17 @@ Foi utilizado o Mongo Atlas, que alem de ser o banco MongoDB ele já fica em nuv
 
 - [Backend](https://github.com/diegohfcelestino/desafio-tecnico-fullstack-graoDireto/tree/main/api-restaurante)
   
-O backend foi desenvolvido utilizando NodeJS, Express e o JWT para proteção de rotas. O projeto foi publicado no Rende, plataforma para fazer deploy com Node e nelepossui as seguintes requisições/end points:
+O backend foi desenvolvido utilizando NodeJS, Express e o JWT para proteção de rotas. O projeto foi publicado no Rende, plataforma para fazer deploy com Node e nele possui as seguintes requisições/end points:
 
 - Criar usuário, alterar, buscar todos os usuário e buscar um usuário por ID.
 - Autenticação,
 - Cadastrar restaurante e buscar todos os restaurantes.
 - Cadastrar cardápio vinculando um restaurante, buscar todos os cardápios, buscar cardápio por ID.
+- Pesquisa dinamica de cardápio, por nome do restaurante, por nome do prato e descrição do prato.
 - Buscar os cardápios por ID de um restaurante e apagar cardapios.
 
 
-Foi criada a documentação de todos os end points pelo [Swagger](https://api-restaurant-scxy.onrender.com/documentation/), já com exemplos para utilizar e implantar o back end, e também está publicada.
+Foi criada a documentação de todos os end points utilizando o Swagger, para ter acesso, basta clicar [aqui](https://api-restaurant-scxy.onrender.com/documentation/), ou copiar o link `https://api-restaurant-scxy.onrender.com/documentation/` e colar em seu navegador.
 
 
 ### Mobile  

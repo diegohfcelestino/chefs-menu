@@ -9,7 +9,7 @@ import {
   eraseService
 } from "../services/menu.service.js";
 
-const create = async (req, res) => {
+export const create = async (req, res) => {
   try {
     const { type, name, description, background, value, restaurant } = req.body;
 
@@ -34,7 +34,7 @@ const create = async (req, res) => {
 };
 
 
-const findAll = async (req, res) => {
+export const findAll = async (req, res) => {
   try {
     let { limit, skip } = req.query;
 
@@ -107,7 +107,7 @@ const findAll = async (req, res) => {
   }
 };
 
-const findByIdRestaurant = async (req, res) => {
+export const findByIdRestaurant = async (req, res) => {
   try {
     const { idRestaurant } = req.params;
     const menu = await findByIdRestaurantService(idRestaurant);
@@ -153,7 +153,7 @@ const findByIdRestaurant = async (req, res) => {
   }
 };
 
-const findById = async (req, res) => {
+export const findById = async (req, res) => {
   try {
     const { id } = req.params;
     const menu = await findByIdService(id);
@@ -169,13 +169,12 @@ const findById = async (req, res) => {
 };
 
 
-const searchByText = async (req, res) => {
+export const searchByText = async (req, res) => {
   try {
     const { text } = req.query;
-    console.log(text);
     const menu = await searchByTextService(text);
     if (menu.length === 0) {
-      return res.status(400).send({ message: "Não há nenhum restaurante com esta descrição" });
+      return res.status(400).send({ message: "Não há nenhum restaurante ou prato com esta descrição" });
     }
 
     const menuGroup = menu.map((item) => ({
@@ -214,7 +213,7 @@ const searchByText = async (req, res) => {
   }
 };
 
-const erase = async (req, res) => {
+export const erase = async (req, res) => {
   try {
     const { id } = req.params;
     const menu = await findByIdService(id);
@@ -231,5 +230,3 @@ const erase = async (req, res) => {
   }
 };
 
-
-export { create, findAll, findByIdRestaurant, findById, searchByText, erase };

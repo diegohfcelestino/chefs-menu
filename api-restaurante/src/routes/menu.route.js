@@ -5,7 +5,7 @@ import { create, findAll, findByIdRestaurant, findById, searchByText, erase } fr
 
 router.post("/", authMiddleware, create);
 router.get("/", authMiddleware, findAll);
-router.get("/search", searchByText);
+router.get("/search", authMiddleware, searchByText);
 router.get("/idRestaurant/:idRestaurant", authMiddleware, findByIdRestaurant);
 router.get("/:id", authMiddleware, findById);
 router.delete("/:id", authMiddleware, erase);

@@ -1,8 +1,5 @@
-import Restaurant from "../models/Restaurant.js";
+import { Restaurant } from "../models/Restaurant.js";
 
-const createService = (body) => Restaurant.create(body);
-
-const findAllService = () => Restaurant.find().sort({ km: 1 });
-const findByIdService = (id) => Restaurant.findById(id);
-
-export { createService, findAllService, findByIdService };
+export const createService = (body) => Restaurant.create(body);
+export const findAllService = () => Restaurant.find().sort({ km: 1 });
+export const findByIdService = (id) => Restaurant.findById(id);

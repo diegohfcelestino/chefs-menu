@@ -422,6 +422,46 @@
         }
       }
     },
+    "/menu/search": {
+      "get": {
+        "summary": "Pesquisar cardápio",
+        "description": "Rota responsável por pesquisar os cardápios por nome do restaurante, nome do prato e descrição do prato.",
+        "tags": [
+          "Menu"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "text",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          },
+          "400": {
+            "description": "Not Found"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Menu"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/menu/idRestaurant/{id}/": {
       "get": {
         "summary": "Buscar cardápio por id do restaurante",

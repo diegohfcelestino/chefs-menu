@@ -1,13 +1,13 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { HStack, Image, Text } from "native-base";
 import React from "react";
-import { SafeAreaView } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
 import theme from "../assets/theme";
 import { useAppContext } from "../context/AppContext";
-import { Home } from "../pages/home/Home";
-import { Login } from "../pages/login/Login";
+import { Home } from "../pages/Home";
+import { Login } from "../pages/Login";
 import { IconArrowLeft, IconCloseMenu, IconOpenMenu } from "../utils/icons";
+import { Cadastro } from "../pages/Cadastro";
 const Stack = createNativeStackNavigator();
 
 const Routes = () => {
@@ -21,7 +21,7 @@ const Routes = () => {
         headerMode: 'screen',
         headerTintColor: theme.darkColor,
         headerTitleStyle: { fontSize: RFValue(20), fontWeight: 'bold' },
-        headerStyle: { backgroundColor: theme.primaryColor },
+        headerStyle: { backgroundColor: theme.lightColor },
         headerTitleAlign: "center",
         headerBackTitle: "Voltar",
         headerBackTitleVisible: true,
@@ -52,6 +52,18 @@ const Routes = () => {
 
         }}
       />
+      <Stack.Screen
+        name="Cadastro"
+        component={Cadastro}
+        options={{
+          headerShown: false,
+          headerTitle: "Cadastro",
+          animationTypeForReplace: 'push',
+          headerBackVisible: false,
+          headerBackTitleVisible: false,
+
+        }}
+      />
 
       {/* <Stack.Screen
         name="Login"
@@ -66,10 +78,10 @@ const Routes = () => {
             openDrawer ?
               <IconCloseMenu size={30} style={{ padding: 10 }} onPress={() => {
                 setOpenDrawer(!openDrawer);
-              }} color={theme.secondaryColor} /> :
+              }} color={theme.blue} /> :
               <IconOpenMenu size={30} style={{ padding: 10 }} onPress={() => {
                 setOpenDrawer(!openDrawer);
-              }} color={theme.secondaryColor} />
+              }} color={theme.blue} />
           )
         })}
       /> */}

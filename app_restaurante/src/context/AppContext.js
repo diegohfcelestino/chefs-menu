@@ -17,9 +17,20 @@ export function useAppContext() {
 }
 
 export function AppProvider({ children }) {
+  const initialFormUsuario = {
+    nome: "",
+    nomeUsuario: "",
+    usuario: "",
+    senha: "",
+    confirmaSenha: "",
+    avatar: "",
+    background: "",
+  };
   const navigation = useNavigation();
-  const [usuario, setUsuario] = useState('');
-  const [senha, setSenha] = useState('');
+  const [formUsuario, setFormUsuario] = useState(initialFormUsuario);
+  const [showSenha, setShowSenha] = useState(false);
+  const [showConfirmaSenha, setShowConfirmaSenha] = useState(false);
+  const [erro, setErro] = useState('');
   const [loading, setLoading] = useState(false);
   const [openDrawer, setOpenDrawer] = useState(false);
 
@@ -28,8 +39,7 @@ export function AppProvider({ children }) {
     try {
       const { emailStorage, senhaStorage } = await handleGetAsyncStorage();
       if (emailStorage !== null && senhaStorage !== null) {
-        setUsuario(emailStorage);
-        setSenha(senhaStorage);
+        setFormUsuario({ ...formUsuario, usuario: emailStorage, senha: senhaStorage });
       }
     } catch (error) {
       console.log("erro ao pegar dados do usuário no storage", error);
@@ -43,8 +53,7 @@ export function AppProvider({ children }) {
         onPress: () => {
           sairApp(),
             setOpenDrawer(false);
-          setUsuario(''),
-            setSenha(""),
+          setFormUsuario(''),
             navigation.navigate('Login');
         }
       },
@@ -88,7 +97,7 @@ export function AppProvider({ children }) {
 
   function drawerView() {
     return (
-      <VStack flex={1} justifyContent="flex-start" py={10} bgColor={theme.primaryColor} alignItems="flex-start" >
+      <VStack flex={1} justifyContent="flex-start" py={10} bgColor={theme.lightColor} alignItems="flex-start" >
         <TouchableOpacity onPress={() => { navigation.navigate('Home'); setOpenDrawer(false); }} style={{ flexDirection: "row", alignItems: "center", marginTop: 15 }}>
           <IconHome style={{ marginHorizontal: 10 }} size={40} />
           <Text fontSize={20} fontWeight="bold">Home</Text>
@@ -108,20 +117,28 @@ export function AppProvider({ children }) {
     );
   };
 
+  function handleGoBack() {
+    navigation.goBack();
+  }
+
 
   useEffect(() => {
     console.log("usando o context");
-    setUsuario('');
-    setSenha("");
+    setFormUsuario(initialFormUsuario);
   }, []);
 
 
 
   const value = {
-    usuario,
-    setUsuario,
-    senha,
-    setSenha,
+    navigation,
+    formUsuario,
+    setFormUsuario,
+    showSenha,
+    showConfirmaSenha,
+    setShowConfirmaSenha,
+    setShowSenha,
+    erro,
+    setErro,
     loading,
     setLoading,
     getUserStorage,
@@ -129,6 +146,7 @@ export function AppProvider({ children }) {
     openDrawer,
     setOpenDrawer,
     drawerView,
+    handleGoBack
   };
 
 

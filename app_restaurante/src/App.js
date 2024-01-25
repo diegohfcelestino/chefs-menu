@@ -8,6 +8,7 @@ import theme from './assets/theme';
 import Toast from 'react-native-toast-message';
 import { verificarConexaoComInternet } from './services/helpers';
 import { AppProvider } from './context/AppContext';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 function App() {
 
@@ -17,7 +18,7 @@ function App() {
     dark: true,
     colors: {
       background: theme.backgroundColor,
-      card: theme.primaryColor,
+      card: theme.lightColor,
     },
   };
 
@@ -32,11 +33,13 @@ function App() {
       <FlipperAsyncStorage />
       <NavigationContainer theme={CustonTheme}>
         <NativeBaseProvider>
-          <StatusBar barStyle="light-content" translucent backgroundColor="transparent" />
-          <AppProvider>
-            <Routes />
-            <Toast />
-          </AppProvider>
+          <StatusBar barStyle="light-content" backgroundColor={theme.darkColor} />
+          <SafeAreaView style={{ flex: 1 }}>
+            <AppProvider>
+              <Routes />
+              <Toast />
+            </AppProvider>
+          </SafeAreaView>
         </NativeBaseProvider>
       </NavigationContainer>
     </>

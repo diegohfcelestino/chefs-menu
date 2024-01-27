@@ -1,4 +1,4 @@
-import { Center, Heading, Icon, Image, Pressable, ScrollView, Text, VStack, View } from "native-base";
+import { Center, Icon, Image, Pressable, ScrollView, Text, VStack, View } from "native-base";
 import React, { useEffect } from "react";
 import CadastroImg from '../assets/img/login.png';
 import LogoImg from '../assets/img/logo.png';
@@ -8,7 +8,11 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { Input } from "../components/input/Input";
 import theme from "../assets/theme";
 import { Button } from "../components/button/Button";
+import { RFValue } from "react-native-responsive-fontsize";
 import { validaAvatar, validaConfirmaSenha, validaEmail, validaNome, validaNomeUsuario, validaSenha } from "../utils/validacoes";
+import { handlePost } from "../services/service";
+import { errorMessage, successMessage } from "../components/toast/Toast";
+import { Background } from "../components/background/Background";
 
 export const Cadastro = () => {
   const {
@@ -21,7 +25,10 @@ export const Cadastro = () => {
     setShowConfirmaSenha,
     erro,
     setErro,
-    handleGoBack
+    handleGoBack,
+    loading,
+    setLoading,
+    initialFormUsuario
   } = useAppContext();
 
   const validarInput = () => {
@@ -52,43 +59,82 @@ export const Cadastro = () => {
     }
   };
 
+  async function cadastrar() {
+    setLoading(true);
+    const params = {
+      name: formUsuario?.nome,
+      username: formUsuario?.nomeUsuario,
+      email: formUsuario?.usuario,
+      password: formUsuario?.senha,
+      avatar: formUsuario?.avatar,
+      background: formUsuario?.background
+    };
+    handlePost("user", params).then(async (response) => {
+      if (response.data) {
+        successMessage(response.data.message);
+        navigation.navigate("Login");
+      }
+      setLoading(false);
+    }).catch((error) => {
+      let message = error.includes("duplicate key");
+      if (message) {
+        errorMessage("Nome de usuário ou e-mail já cadastrados.");
+      } else {
+        errorMessage(message);
+      }
+      setLoading(false);
+      console.log("Catch login", error);
+    }).finally(() => setLoading(false));
+
+  }
+
   useEffect(() => {
     validarInput();
   }, [formUsuario]);
+  useEffect(() => {
+    setFormUsuario(initialFormUsuario);
+  }, []);
   return (
     <TouchableWithoutFeedback
       onPress={Keyboard.dismiss}
       containerStyle={{ flex: 1 }}>
-      <ScrollView flex={1} flexGrow={1} bgColor={theme.overlayColor} >
-        <VStack pb={10} >
+      <View flex={1}>
+        {/* <Image
+          w="full"
+          h="100%"
+          source={CadastroImg}
+          defaultSource={CadastroImg}
+          alt="Imagem de fundo"
+          resizeMode="cover"
+          opacity={0.2}
+          position="absolute"
+        /> */}
+        <Background opacity={0.3} />
+        <VStack pb={10} flex={1} bgColor={theme.overlayColor}>
 
-          <Image
-            w="full"
-            source={CadastroImg}
-            defaultSource={CadastroImg}
-            alt="Imagem de fundo"
-            resizeMode="cover"
-            opacity={0.2}
-            position="absolute"
-          />
-          <View mx={6} flex={1}>
-            <Center>
-              <Text textAlign="center" fontSize={48} py={0} fontWeight="bold" color={theme.orange}>Chef's Menu</Text>
-              <Heading color={theme.lightColor} fontSize={32} mb={4} fontFamily="heading">
-                Iniciar Cadastro
-              </Heading>
+          <View alignItems="center" my={4}>
+            <Text fontSize={RFValue(40)} py={0} fontWeight="bold" color={theme.orange}>
+              Chef's Menu
+            </Text>
+            <Text color={theme.lightColor} fontSize={RFValue(25)} mb={4} fontWeight="bold">
+              Iniciar Cadastro
+            </Text>
+            {erro != '' && (
+              <Text
+                color="yellow.300"
+                fontSize={RFValue(12)}
+                pb={2}
+                fontWeight="bold"
+              >
+                {erro}
+              </Text>
+            )}
+          </View>
 
-              {erro != '' && (
-                <Heading
-                  color="yellow.300"
-                  fontSize={16}
-                  pb={2}
-                  fontFamily="heading"
-                >
-                  {erro}
-                </Heading>
-              )}
 
+          <ScrollView flex={1} flexGrow={1}  >
+
+            <VStack flex={1} mx={10}>
               <Input
                 placeholder="Informe seu nome"
                 autoCapitalize="none"
@@ -176,7 +222,7 @@ export const Cadastro = () => {
                     <Icon
                       as={
                         <MaterialIcons
-                          name={showSenha ? 'visibility' : 'visibility-off'}
+                          name={showConfirmaSenha ? 'visibility' : 'visibility-off'}
                         />
                       }
                       size={7}
@@ -216,27 +262,35 @@ export const Cadastro = () => {
                 onChangeText={(e) => setFormUsuario({ ...formUsuario, background: e })}
                 value={formUsuario?.background}
               />
-              <Button
-                mt={4}
-                w="full"
-                h={12}
-                color={theme.lightColor}
-                disabled={erro}
-                title="Cadastrar"
-                bg={!erro ? theme.orange : theme.grayLight}
-              />
-              <Button
-                mt={8}
-                h={12}
-                title="Voltar para o Login"
-                variant="outline"
-                onPress={handleGoBack}
-              />
-            </Center>
+            </VStack>
 
+          </ScrollView>
+
+          <View mx={10}>
+            <Button
+              mt={4}
+              w="full"
+              h={12}
+              color={theme.lightColor}
+              disabled={erro}
+              title="Cadastrar"
+              isDisabled={!formUsuario.nome || !formUsuario.nomeUsuario || !formUsuario.usuario || !formUsuario.senha || !formUsuario.confirmaSenha || !formUsuario.avatar || !formUsuario.background}
+              isLoading={loading}
+              bg={theme.orange}
+              onPress={() => cadastrar()}
+            />
+            <Button
+              mt={8}
+              h={12}
+              title="Voltar para o Login"
+              variant="outline"
+              onPress={() => handleGoBack()}
+            />
           </View>
+
+
         </VStack>
-      </ScrollView>
+      </View>
     </TouchableWithoutFeedback>
   );
 };

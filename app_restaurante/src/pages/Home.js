@@ -5,6 +5,7 @@ import { IconArrowLeft, IconArrowRight } from '../utils/icons';
 import theme from '../assets/theme';
 import { TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { RFValue } from "react-native-responsive-fontsize";
 
 export const Home = () => {
   const navigation = useNavigation();
@@ -12,21 +13,25 @@ export const Home = () => {
     <View flex={1} >
       <Image
         w="full"
+        h="100%"
         source={HomeImg}
         defaultSource={HomeImg}
         alt="Imagem de fundo"
         resizeMode="cover"
         position="absolute"
       />
-      <View w="full" bgColor={theme.overlayColor} py={10} px={1}>
-        <Text textAlign="center" fontSize={40} pb={10} fontWeight="bold" color={theme.orange}>Chef's Menu</Text>
-        <Text fontSize={28} fontWeight="bold" color={theme.whiteLight}>Encontre os melhores restaurante de sua cidade!</Text>
+      <View>
+        <View w="full" bgColor={theme.overlayColor} py={10} px={1}>
+          <Text textAlign="center" fontSize={RFValue(40)} pb={10} fontWeight="bold" color={theme.orange}>Chef's Menu</Text>
+          <Text textAlign="center" fontSize={RFValue(20)} fontWeight="bold" color={theme.whiteLight}>Os melhores restaurante de sua cidade!</Text>
+        </View>
       </View>
-      <View bgColor={theme.overlayColor} justifyContent="center" alignItems="center" size={20} rounded="full" position="absolute" bottom={5} right={5}>
+      <View bgColor={theme.whiteLight} justifyContent="center" alignItems="center" size={20} rounded="full" position="absolute" bottom={5} right={5}>
         <TouchableOpacity onPress={() => navigation.navigate("Login")} >
-          <IconArrowRight />
+          <IconArrowRight color={theme.orange} />
         </TouchableOpacity>
       </View>
-    </View>);
+    </View>
+  );
 
 };

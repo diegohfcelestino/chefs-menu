@@ -18,10 +18,10 @@ export const validaConfirmaSenha = (senha, confirmaSenha) => {
 };
 
 export const validaAvatar = (avatar) => {
-  return avatar?.length > 30;
+  return avatar?.length > 15;
 };
 export const validaBackGround = (background) => {
-  return background?.length > 30;
+  return background?.length > 15;
 };
 
 

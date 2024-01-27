@@ -4,7 +4,7 @@ export function sairApp(fnCallBack = () => { }) {
   try {
     console.log("limpando os dados");
     AsyncStorage.multiRemove([
-      "chefsMenu@token",
+      "chefsMenu@accessToken",
       "chefsMenu@email",
       "chefsMenu@password",
       "chefsMenu@user",
@@ -15,25 +15,22 @@ export function sairApp(fnCallBack = () => { }) {
   }
 }
 
-export const handleSetAsyncStorage = async (token, email, senha, usuario) => {
-  await AsyncStorage.setItem("chefsMenu@token", JSON.stringify(token));
-  await AsyncStorage.setItem("chefsMenu@email", JSON.stringify(email));
-  await AsyncStorage.setItem("chefsMenu@password", JSON.stringify(senha));
-  await AsyncStorage.setItem("chefsMenu@user", JSON.stringify(usuario));
+export const handleSetAsyncStorage = async (accessToken, email, senha) => {
+  await AsyncStorage.setItem("chefsMenu@accessToken", accessToken);
+  await AsyncStorage.setItem("chefsMenu@email", email);
+  await AsyncStorage.setItem("chefsMenu@password", senha);
 };
 
 export const handleGetAsyncStorage = async () => {
-  const token = await AsyncStorage.getItem('chefsMenu@token');
+  const accessToken = await AsyncStorage.getItem('chefsMenu@accessToken');
   const emailStorage = await AsyncStorage.getItem('chefsMenu@email');
-  const senhaStorage = await AsyncStorage.getItem('chefsMenu@senha');
-  const usuarioStorage = await AsyncStorage.getItem('chefsMenu@usuario');
+  const senhaStorage = await AsyncStorage.getItem('chefsMenu@password');
   const validaUsuario = await AsyncStorage.getItem('chefsMenu@salvarUsuario');
 
   return {
-    token,
+    accessToken,
     emailStorage,
     senhaStorage,
-    usuarioStorage,
     validaUsuario
   };
 };

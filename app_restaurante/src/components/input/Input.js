@@ -11,7 +11,7 @@ export function Input({ ...rest }) {
       rounded="xl"
       fontSize="md"
       color="black"
-      mb={4}
+      mb={6}
       placeholderTextColor="gray.300"
       _focus={{
         bg: 'white',

@@ -39,3 +39,34 @@ export function formataMoeda(v) {
   }
   return v;
 }
+
+export function handleError(error, altMessage = "Ocorreu um erro durante o processo") {
+  if (!error?.response) error = { response: { data: false, status: false } };
+  const { data, status } = error?.response;
+  let message = "";
+  console.log("debugando erro", data);
+  if (data) {
+    const errorMessage = data?.message;
+    message = errorMessage;
+  }
+
+  switch (status) {
+    case 400:
+      message = message ?? "Verifique os dados enviados";
+      break;
+    case 401:
+      message = message ?? "Não autenticado";
+      break;
+    case 404:
+      message = message ?? "Nenhum registro encontrado!";
+      break;
+    case 500:
+      message = message ?? "Erro no servidor";
+      break;
+    default:
+      message = message ?? "Erro desconhecido!";
+      break;
+  }
+
+  if (message) return `${altMessage} - ${message}`;
+}

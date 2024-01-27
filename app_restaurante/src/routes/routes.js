@@ -8,6 +8,7 @@ import { Home } from "../pages/Home";
 import { Login } from "../pages/Login";
 import { IconArrowLeft, IconCloseMenu, IconOpenMenu } from "../utils/icons";
 import { Cadastro } from "../pages/Cadastro";
+import { Restaurante } from "../pages/Restaurantes";
 const Stack = createNativeStackNavigator();
 
 const Routes = () => {
@@ -58,6 +59,18 @@ const Routes = () => {
         options={{
           headerShown: false,
           headerTitle: "Cadastro",
+          animationTypeForReplace: 'push',
+          headerBackVisible: false,
+          headerBackTitleVisible: false,
+
+        }}
+      />
+      <Stack.Screen
+        name="Restaurante"
+        component={Restaurante}
+        options={{
+          headerShown: false,
+          headerTitle: "Restaurante",
           animationTypeForReplace: 'push',
           headerBackVisible: false,
           headerBackTitleVisible: false,

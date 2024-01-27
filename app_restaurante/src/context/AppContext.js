@@ -29,6 +29,7 @@ export function AppProvider({ children }) {
   const navigation = useNavigation();
   const [formUsuario, setFormUsuario] = useState(initialFormUsuario);
   const [showSenha, setShowSenha] = useState(false);
+  const [salvarUsuario, setSalvarUsuario] = useState(false);
   const [showConfirmaSenha, setShowConfirmaSenha] = useState(false);
   const [erro, setErro] = useState('');
   const [loading, setLoading] = useState(false);
@@ -53,7 +54,7 @@ export function AppProvider({ children }) {
         onPress: () => {
           sairApp(),
             setOpenDrawer(false);
-          setFormUsuario(''),
+          setFormUsuario(initialFormUsuario),
             navigation.navigate('Login');
         }
       },
@@ -133,6 +134,7 @@ export function AppProvider({ children }) {
     navigation,
     formUsuario,
     setFormUsuario,
+    initialFormUsuario,
     showSenha,
     showConfirmaSenha,
     setShowConfirmaSenha,
@@ -146,7 +148,8 @@ export function AppProvider({ children }) {
     openDrawer,
     setOpenDrawer,
     drawerView,
-    handleGoBack
+    handleGoBack,
+    salvarUsuario, setSalvarUsuario
   };
 
 

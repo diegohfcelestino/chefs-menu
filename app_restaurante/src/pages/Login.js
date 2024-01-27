@@ -10,7 +10,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { useAppContext } from "../context/AppContext";
 import { RFValue } from "react-native-responsive-fontsize";
 import { handlePost } from "../services/service";
-import { errorMessage, successMessage } from "../components/toast/Toast";
+import { errorMessage, infoMessage, successMessage } from "../components/toast/Toast";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { handleGetAsyncStorage, handleSetAsyncStorage } from "../services/storage";
 import { useFocusEffect } from "@react-navigation/native";
@@ -51,12 +51,12 @@ export const Login = () => {
         } else {
           AsyncStorage.removeItem('chefsMenu@salvarUsuario');
         }
-        navigation.navigate("Restaurante");
+        navigation.navigate("Restaurantes");
         setLoading(false);
       }).catch((error) => {
         setLoading(false);
         console.log("Catch login", error);
-        errorMessage(error);
+        infoMessage(error ? error : "Tempo limite excedido");
         AsyncStorage.multiRemove([`chefsMenu@accessToken`, `chefsMenu@email`, `chefsMenu@password'`]);
       }).finally(() => setLoading(false));
     } catch (error) {

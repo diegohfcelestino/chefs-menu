@@ -23,7 +23,7 @@ export const Home = () => {
       <View>
         <View w="full" bgColor={theme.overlayColor} py={10} px={1}>
           <Text textAlign="center" fontSize={RFValue(40)} pb={10} fontWeight="bold" color={theme.orange}>Chef's Menu</Text>
-          <Text textAlign="center" fontSize={RFValue(20)} fontWeight="bold" color={theme.whiteLight}>Os melhores restaurante de sua cidade!</Text>
+          <Text textAlign="center" fontSize={RFValue(20)} fontWeight="bold" color={theme.whiteLight}>Os melhores restaurante da cidade!</Text>
         </View>
       </View>
       <View bgColor={theme.whiteLight} justifyContent="center" alignItems="center" size={20} rounded="full" position="absolute" bottom={5} right={5}>

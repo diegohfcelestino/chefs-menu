@@ -3,7 +3,7 @@ import { API_URL } from '@env';
 
 const connect = axios.create({
   baseURL: API_URL,
-  timeout: 15000
+  timeout: 35000
 });
 
 let call;
@@ -12,7 +12,7 @@ const api = (config = {}, token = null, autoCancel = false) => {
     const interval = setInterval(function () {
       call.cancel("canceled");
       clearInterval(interval);
-    }, 8000);
+    }, 20000);
 
     if (autoCancel) {
       call.cancel("canceled");

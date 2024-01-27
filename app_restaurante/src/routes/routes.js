@@ -8,7 +8,8 @@ import { Home } from "../pages/Home";
 import { Login } from "../pages/Login";
 import { IconArrowLeft, IconCloseMenu, IconOpenMenu } from "../utils/icons";
 import { Cadastro } from "../pages/Cadastro";
-import { Restaurante } from "../pages/Restaurantes";
+import { Restaurante, Restaurantes } from "../pages/Restaurantes";
+import { Pesquisar } from "../pages/Pesquisar";
 const Stack = createNativeStackNavigator();
 
 const Routes = () => {
@@ -66,11 +67,23 @@ const Routes = () => {
         }}
       />
       <Stack.Screen
-        name="Restaurante"
-        component={Restaurante}
+        name="Restaurantes"
+        component={Restaurantes}
         options={{
           headerShown: false,
-          headerTitle: "Restaurante",
+          headerTitle: "Restaurantes",
+          animationTypeForReplace: 'push',
+          headerBackVisible: false,
+          headerBackTitleVisible: false,
+
+        }}
+      />
+      <Stack.Screen
+        name="Pesquisar"
+        component={Pesquisar}
+        options={{
+          headerShown: false,
+          headerTitle: "Pesquisar",
           animationTypeForReplace: 'push',
           headerBackVisible: false,
           headerBackTitleVisible: false,

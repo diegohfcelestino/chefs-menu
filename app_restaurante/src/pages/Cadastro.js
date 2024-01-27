@@ -11,7 +11,7 @@ import { Button } from "../components/button/Button";
 import { RFValue } from "react-native-responsive-fontsize";
 import { validaAvatar, validaConfirmaSenha, validaEmail, validaNome, validaNomeUsuario, validaSenha } from "../utils/validacoes";
 import { handlePost } from "../services/service";
-import { errorMessage, successMessage } from "../components/toast/Toast";
+import { errorMessage, infoMessage, successMessage } from "../components/toast/Toast";
 import { Background } from "../components/background/Background";
 
 export const Cadastro = () => {
@@ -80,7 +80,7 @@ export const Cadastro = () => {
       if (message) {
         errorMessage("Nome de usuário ou e-mail já cadastrados.");
       } else {
-        errorMessage(message);
+        infoMessage(error ? error : "Tempo limite excedido");
       }
       setLoading(false);
       console.log("Catch login", error);

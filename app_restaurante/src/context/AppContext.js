@@ -34,6 +34,7 @@ export function AppProvider({ children }) {
   const [erro, setErro] = useState('');
   const [loading, setLoading] = useState(false);
   const [openDrawer, setOpenDrawer] = useState(false);
+  const [listaRestaurantes, setListaRestaurantes] = useState([]);
 
   async function getUserStorage() {
     console.log("Passando pelo getUser ");
@@ -149,7 +150,9 @@ export function AppProvider({ children }) {
     setOpenDrawer,
     drawerView,
     handleGoBack,
-    salvarUsuario, setSalvarUsuario
+    salvarUsuario, setSalvarUsuario,
+    listaRestaurantes,
+    setListaRestaurantes
   };
 
 

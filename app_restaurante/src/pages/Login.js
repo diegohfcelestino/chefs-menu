@@ -30,8 +30,8 @@ export const Login = () => {
     initialFormUsuario
   } = useAppContext();
 
-  async function salvarDadosStorage(accessToken) {
-    accessToken && handleSetAsyncStorage(accessToken, formUsuario?.usuario, formUsuario?.senha);
+  async function salvarDadosStorage(dadosUsuario) {
+    dadosUsuario && handleSetAsyncStorage(dadosUsuario.token, dadosUsuario, formUsuario?.usuario, formUsuario?.senha);
   }
 
   async function login() {
@@ -44,7 +44,7 @@ export const Login = () => {
       };
       handlePost("auth", params).then(async (response) => {
         if (response.data.token) {
-          await salvarDadosStorage(response?.data?.token);
+          await salvarDadosStorage(response?.data);
         }
         if (salvarUsuario) {
           AsyncStorage.setItem('chefsMenu@salvarUsuario', "sim");
@@ -57,7 +57,7 @@ export const Login = () => {
         setLoading(false);
         console.log("Catch login", error);
         infoMessage(error ? error : "Tempo limite excedido");
-        AsyncStorage.multiRemove([`chefsMenu@accessToken`, `chefsMenu@email`, `chefsMenu@password'`]);
+        AsyncStorage.multiRemove([`chefsMenu@accessToken`, `chefsMenu@email`, `chefsMenu@password`, `chefsMenu@usuario`]);
       }).finally(() => setLoading(false));
     } catch (error) {
       console.log("Erro ao buscar dados no storage");

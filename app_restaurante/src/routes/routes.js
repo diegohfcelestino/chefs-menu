@@ -10,6 +10,7 @@ import { IconArrowLeft, IconCloseMenu, IconOpenMenu } from "../utils/icons";
 import { Cadastro } from "../pages/Cadastro";
 import { Restaurante, Restaurantes } from "../pages/Restaurantes";
 import { Pesquisar } from "../pages/Pesquisar";
+import { Perfil } from "../pages/Perfil";
 const Stack = createNativeStackNavigator();
 
 const Routes = () => {
@@ -84,6 +85,18 @@ const Routes = () => {
         options={{
           headerShown: false,
           headerTitle: "Pesquisar",
+          animationTypeForReplace: 'push',
+          headerBackVisible: false,
+          headerBackTitleVisible: false,
+
+        }}
+      />
+      <Stack.Screen
+        name="Perfil"
+        component={Perfil}
+        options={{
+          headerShown: false,
+          headerTitle: "Perfil",
           animationTypeForReplace: 'push',
           headerBackVisible: false,
           headerBackTitleVisible: false,

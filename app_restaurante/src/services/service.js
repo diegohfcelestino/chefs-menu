@@ -30,6 +30,42 @@ export async function handlePost(url, params = {}) {
   }
 }
 
+export async function handlePatch(url, params) {
+
+  try {
+    const { accessToken } = await handleGetAsyncStorage();
+    if (accessToken !== null) {
+
+      console.log("url", url);
+
+      console.log("param novo", params);
+
+      let config = {
+        method: "patch",
+        data: params,
+        url: url,
+      };
+
+      return new Promise((resolve, reject) => {
+        api(config, accessToken)
+          .then((res) => {
+            const data = res.data;
+            resolve({
+              data,
+            });
+          })
+          .catch(error => {
+            reject(handleError(error, "Erro"));
+          });
+      });
+    } else {
+      errorMessage("Erro ao fazer requisição");
+    }
+  } catch (error) {
+    console.log("erro ao pegar dados da empresa no storage", error);
+  }
+}
+
 
 export async function handleGetDefault(url) {
   try {

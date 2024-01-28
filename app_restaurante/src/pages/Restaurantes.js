@@ -169,12 +169,12 @@ export const Restaurantes = ({ route }) => {
   function buscarRestaurantes() {
     setLoading(true);
     handleGetDefault("restaurant").then((response) => {
-      setLoading(false);
       if (response.data) {
         setListaRestaurantes(response.data);
       } else {
         errorMessage("Não retornou nenhum dado!");
       }
+      setLoading(false);
     }).catch((error) => {
       infoMessage(error ? error : "Tempo limite excedido");
       setLoading(false);
@@ -204,7 +204,7 @@ export const Restaurantes = ({ route }) => {
         <FlatList removeClippedSubviews={true} my={16} keyExtractor={item => item._id} flex={1} data={listaRestaurantes} renderItem={({ item }) =>
           <VStack flex={1} rounded="lg" pb={2} bgColor={theme.whiteLight} my={2} mx={2} shadow={3}>
             <TouchableOpacity onPress={() => { console.log("Clicou no restaurante,", item.background); }}>
-              <Image w="full" h={40} source={{ uri: item.background }} rounded="lg" alt="Imagem de fundo do restaurante" />
+              <Image w="full" h={32} source={{ uri: item.background }} rounded="lg" alt="Imagem de fundo do restaurante" />
               <HStack mx={4}>
                 <Image mt={-4} size={20} source={{ uri: item.avatar }} rounded="full" alt="Imagem do avatar" />
                 <VStack flex={1} pl={4}>

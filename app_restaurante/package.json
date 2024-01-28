@@ -21,6 +21,7 @@
     "@react-navigation/native": "6.1.8",
     "@react-navigation/native-stack": "6.9.14",
     "axios": "1.5.1",
+    "crypto-js": "^4.2.0",
     "native-base": "3.4.28",
     "qs": "6.11.2",
     "react": "18.0.0",

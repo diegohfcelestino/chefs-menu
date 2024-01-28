@@ -23,7 +23,18 @@ export const login = async (req, res) => {
 
     const token = generateToken(user.id);
 
-    res.send({ token });
+    const data = {
+      token: token,
+      id: user?._id,
+      name: user?.name,
+      username: user?.username,
+      email: user?.email,
+      avatar: user?.avatar,
+      background: user?.background,
+
+    };
+
+    res.send(data);
   } catch (err) {
     res.status(500).send({ message: err.message });
   }

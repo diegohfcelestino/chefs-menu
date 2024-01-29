@@ -156,7 +156,7 @@ export const Perfil = ({ route }) => {
               <Icon
                 as={<FontAwesome name="sign-out" />}
                 size={10}
-                color={theme.dangerColor}
+                color={theme.whiteLight}
                 mx={4}
                 onPress={() => sairDoAplicativo()}
               />

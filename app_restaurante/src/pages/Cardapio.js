@@ -22,7 +22,8 @@ export const Cardapio = ({ route }) => {
     setLoading,
     openDrawer,
     drawerView,
-    setColorDrawer
+    setColorDrawer,
+    adicionarPedido
   } = useAppContext();
   const [dadosRestaurante, setDadosRestaurante] = useState('');
   const [listaCardapio, setListaCardapio] = useState([]);
@@ -205,7 +206,7 @@ export const Cardapio = ({ route }) => {
               // )}
               renderItem={({ item, section }) =>
                 <VStack flex={1} rounded="lg" pb={2} bgColor={theme.whiteLight} my={2} mx={2} shadow={3} >
-                  <TouchableOpacity onPress={() => navigation.navigate("CardapioDetalhe", { item, dadosRestaurante })}>
+                  <TouchableOpacity onPress={() => navigation.navigate("CardapioDetalhe", item)}>
                     <Image resizeMode="cover" w="full" h={24} source={{ uri: item.background }} rounded="lg" alt="Imagem do item" />
                     <HStack alignItems="flex-end">
                       <VStack flex={1} px={4} >
@@ -222,7 +223,7 @@ export const Cardapio = ({ route }) => {
                         mr={4}
                         mb={2}
                         color={theme.successColor}
-                        onPress={() => console.log("Adiconar item", item)}
+                        onPress={() => adicionarPedido(item)}
                       />
                     </HStack>
                   </TouchableOpacity>

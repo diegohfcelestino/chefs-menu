@@ -12,6 +12,8 @@ import { IconHome, IconPerson, IconSignOut } from "../utils/icons";
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { RFValue } from "react-native-responsive-fontsize";
+import { infoMessage, successMessage } from "../components/toast/Toast";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const AppContext = createContext();
 
@@ -39,6 +41,7 @@ export function AppProvider({ children }) {
   const [openDrawer, setOpenDrawer] = useState(false);
   const [listaRestaurantes, setListaRestaurantes] = useState([]);
   const [colorDrawer, setColorDrawer] = useState('');
+  const [listaPedidos, setListaPedidos] = useState("[]");
 
   const listaMenu = [
     {
@@ -164,6 +167,87 @@ export function AppProvider({ children }) {
   }
 
 
+
+  async function buscarListaPedidos() {
+    setLoading(true);
+    try {
+      const { listaDePedidosStorage } = await handleGetAsyncStorage();
+      if (listaDePedidosStorage !== null) {
+        setListaPedidos(listaDePedidosStorage);
+        setLoading(false);
+
+      } else {
+        setLoading(false);
+        console.log("não tem pedido no storage");
+      }
+    } catch (error) {
+      console.log("erro ao pegar dados do pedido no storage", error);
+      setLoading(false);
+    }
+  };
+
+  function adicionarPedido(item) {
+    Alert.alert('Olá', `Deseja adicionar este item no pedido?`, [
+      {
+        text: 'Sim',
+        onPress: () => {
+          adicionarPedidoNoStorage(item);
+        }
+      },
+      {
+        text: 'Não',
+        style: 'cancel'
+      },
+    ]);
+  }
+
+
+  async function adicionarPedidoNoStorage(pedido) {
+    await buscarListaPedidos();
+    console.log("pedido", pedido);
+    let listaPedidosFormatada = JSON.parse(listaPedidos);
+    const listaFiltrada = listaPedidosFormatada?.filter(item => item?.id === pedido?.id);
+    console.log("listaFiltrada", listaFiltrada);
+    if (listaFiltrada.length == 0) {
+      listaPedidosFormatada.push(pedido);
+      setListaPedidos(listaPedidosFormatada);
+      AsyncStorage.setItem(`chefsMenu@listaDePedidos`, JSON.stringify(listaPedidosFormatada));
+      successMessage("Item adicionado ao pedido");
+    } else {
+      infoMessage("Este item já foi selecionado");
+      setListaPedidos([]);
+    }
+  }
+
+  function removerPedido(item) {
+    Alert.alert('Olá', `Deseja adicionar este item no pedido?`, [
+      {
+        text: 'Sim',
+        onPress: () => {
+          removerPedidosNoStorage(item);
+        }
+      },
+      {
+        text: 'Não',
+        style: 'cancel'
+      },
+    ]);
+  }
+
+  async function removerPedidosNoStorage(pedido) {
+    let listaPedidosFormatada = JSON.parse(listaPedidos);
+    const listaFiltrada = listaPedidosFormatada.filter(item => item?.id === pedido?.id);
+    if (listaFiltrada.length == 1) {
+      listaPedidosFormatada.splice(listaPedidosFormatada.indexOf(pedido), 1);
+      setListaPedidos(listaPedidosFormatada);
+      AsyncStorage.setItem(`chefsMenu@listaDePedidos`, JSON.stringify(listaPedidosFormatada));
+      successMessage("Item removido com sucesso");
+    } else {
+      infoMessage("Item não está nos pedidos");
+    }
+  };
+
+
   useEffect(() => {
     console.log("usando o context");
     setFormUsuario(initialFormUsuario);
@@ -193,7 +277,13 @@ export function AppProvider({ children }) {
     salvarUsuario, setSalvarUsuario,
     listaRestaurantes,
     setListaRestaurantes,
-    colorDrawer, setColorDrawer, sairDoAplicativo
+    colorDrawer, setColorDrawer, sairDoAplicativo,
+    buscarListaPedidos,
+    listaPedidos,
+    adicionarPedido,
+    removerPedido,
+    removerPedidosNoStorage,
+    setListaPedidos
   };
 
 

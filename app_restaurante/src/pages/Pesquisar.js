@@ -137,7 +137,7 @@ export const Pesquisar = ({ route }) => {
             )}
             renderItem={({ item, section }) =>
               <VStack flex={1} rounded="lg" pb={2} bgColor={theme.whiteLight} my={2} mx={2} shadow={3} >
-                <TouchableOpacity onPress={() => { console.log("Clicou no cardapio,", item); }}>
+                <TouchableOpacity onPress={() => navigation.navigate("CardapioDetalhe", item)}>
                   <Image resizeMode="cover" w="full" h={24} source={{ uri: item.background }} rounded="lg" alt="Imagem do item" />
                   <HStack mx={4}>
                     <Image mt={-4} size={20} source={{ uri: item.avatarRestaurant }} rounded="full" alt="Imagem do avatar" />

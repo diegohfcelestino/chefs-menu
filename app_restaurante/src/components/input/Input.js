@@ -5,7 +5,7 @@ export function Input({ ...rest }) {
   return (
     <NativeBaseInput
       bg="white"
-      h={12}
+      h={10}
       px={4}
       borderWidth={0}
       rounded="xl"

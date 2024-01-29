@@ -2,7 +2,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export function sairApp(fnCallBack = () => { }) {
   try {
-    console.log("limpando os dados");
     AsyncStorage.multiRemove([
       "chefsMenu@accessToken",
       "chefsMenu@email",
@@ -11,7 +10,7 @@ export function sairApp(fnCallBack = () => { }) {
       "chefsMenu@salvarUsuario",
     ], fnCallBack);
   } catch (error) {
-    console.log("Erro ao limpar storage ao sair do app", error);
+    console.log("Erro para limpar storage ao sair do app", error);
   }
 }
 

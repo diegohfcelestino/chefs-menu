@@ -44,7 +44,6 @@ export function handleError(error, altMessage = "Ocorreu um erro durante o proce
   if (!error?.response) error = { response: { data: false, status: false } };
   const { data, status } = error?.response;
   let message = "";
-  console.log("debugando erro", data);
   if (data) {
     const errorMessage = data?.message;
     message = errorMessage;

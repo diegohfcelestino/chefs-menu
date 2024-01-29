@@ -1,7 +1,6 @@
-import { Center, HStack, Icon, SectionList, Text, VStack, View } from "native-base";
+import { Center, HStack, Icon, SectionList, Text, View, VStack } from "native-base";
 import React, { useEffect, useState } from "react";
 import { ActivityIndicator, Keyboard, Pressable, TouchableOpacity, TouchableWithoutFeedback } from "react-native";
-import { RFValue } from "react-native-responsive-fontsize";
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import theme from "../assets/theme";
 import { Background } from "../components/background/Background";
@@ -11,12 +10,14 @@ import { Input } from "../components/input/Input";
 import { errorMessage, infoMessage } from "../components/toast/Toast";
 import { useAppContext } from "../context/AppContext";
 import { handleGetWithParams } from "../services/service";
+import SemImagem from '../assets/img/sem-imagem.png';
 
 export const Pesquisar = ({ route }) => {
   const {
     navigation,
     loading,
-    setLoading
+    setLoading,
+    adicionarPedido
   } = useAppContext();
   const [pesquisa, setPesquisa] = useState('');
   const [listaPesquisada, setListaPesquisada] = useState([]);
@@ -42,7 +43,7 @@ export const Pesquisar = ({ route }) => {
       infoMessage(error ? error : "Tempo limite excedido");
       setListaPesquisada([]);
       setNovaLista([]);
-      console.log("Pesquisa", error);
+      console.log("Catch Pesquisa", error);
       setLoading(false);
     }).finally(() => setLoading(false));
   }
@@ -71,7 +72,7 @@ export const Pesquisar = ({ route }) => {
       <View flex={1} pb={16}>
         <Background opacity={0.4} />
         <View w="full" bgColor={theme.overlayColor} py={1} px={1}>
-          <Text textAlign="center" fontSize={RFValue(20)} fontWeight="bold" color={theme.orange}>Chef's Menu</Text>
+          <Text textAlign="center" fontSize={26} fontWeight="bold" color={theme.orange}>Chef's Menu</Text>
         </View>
 
         <Input
@@ -100,16 +101,16 @@ export const Pesquisar = ({ route }) => {
         {listaPesquisada.length > 0 &&
           <HStack mx={6} justifyContent="space-around" mb={4}>
             <TouchableOpacity onPress={() => filtrarLista()}>
-              <Text fontSize={RFValue(14)} color={color === "Todos" ? theme.orange : theme.whiteLight}>Todos</Text>
+              <Text fontSize={20} color={color === "Todos" ? theme.orange : theme.whiteLight}>Todos</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => filtrarLista("Pratos")}>
-              <Text fontSize={RFValue(14)} color={color === "Pratos" ? theme.orange : theme.whiteLight}>Pratos</Text>
+              <Text fontSize={20} color={color === "Pratos" ? theme.orange : theme.whiteLight}>Pratos</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => filtrarLista("Bebidas")}>
-              <Text fontSize={RFValue(14)} color={color === "Bebidas" ? theme.orange : theme.whiteLight}>Bebidas</Text>
+              <Text fontSize={20} color={color === "Bebidas" ? theme.orange : theme.whiteLight}>Bebidas</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => filtrarLista("Sobremesas")}>
-              <Text fontSize={RFValue(14)} color={color === "Sobremesas" ? theme.orange : theme.whiteLight}>Sobremesas</Text>
+              <Text fontSize={20} color={color === "Sobremesas" ? theme.orange : theme.whiteLight}>Sobremesas</Text>
             </TouchableOpacity>
           </HStack>
         }
@@ -129,33 +130,33 @@ export const Pesquisar = ({ route }) => {
             initialNumToRender={10}
             ListEmptyComponent={() =>
               <Center w="full" bgColor={theme.overlayColor} py={1} px={1}>
-                <Text textAlign="center" fontSize={RFValue(20)} fontWeight="bold" color={theme.whiteLight}>Não há nenhum restaurante ou item com essa descrição!</Text>
+                <Text textAlign="center" fontSize={26} fontWeight="bold" color={theme.whiteLight}>Não há nenhum restaurante ou item com essa descrição!</Text>
               </Center>
             }
             renderSectionHeader={({ section }) => (
-              <Text textAlign="center" fontWeight="bold" fontSize={RFValue(16)} color={theme.orange}>{section.title}</Text>
+              <Text textAlign="center" fontWeight="bold" fontSize={22} color={theme.orange}>{section.title}</Text>
             )}
             renderItem={({ item, section }) =>
               <VStack flex={1} rounded="lg" pb={2} bgColor={theme.whiteLight} my={2} mx={2} shadow={3} >
                 <TouchableOpacity onPress={() => navigation.navigate("CardapioDetalhe", item)}>
-                  <Image resizeMode="cover" w="full" h={24} source={{ uri: item.background }} rounded="lg" alt="Imagem do item" />
+                  <Image resizeMode="cover" w="full" h={24} source={item.background ? { uri: item.background } : SemImagem} rounded="lg" alt="Imagem do item" />
                   <HStack mx={4}>
-                    <Image mt={-4} size={20} source={{ uri: item.avatarRestaurant }} rounded="full" alt="Imagem do avatar" />
+                    <Image mt={-4} size={20} source={item.avatarRestaurant ? { uri: item.avatarRestaurant } : SemImagem} rounded="full" alt="Imagem do avatar" />
                     <VStack flex={1} pl={4} >
                       <View alignItems="flex-start" pt={1} >
-                        <Text fontSize={RFValue(12)} fontWeight="bold" color={theme.darkColor}>{item?.name}</Text>
-                        <Text fontSize={RFValue(10)} fontWeight="bold" color={theme.orange}>{item?.nameRestaurant}</Text>
-                        <Text fontSize={RFValue(8)} fontWeight="bold" ellipsizeMode="tail" numberOfLines={2} color={theme.darkColor}>{item?.description}</Text>
+                        <Text fontSize={16} fontWeight="bold" color={theme.darkColor}>{item?.name}</Text>
+                        <Text fontSize={14} fontWeight="bold" color={theme.orange}>{item?.nameRestaurant}</Text>
+                        <Text fontSize={12} fontWeight="bold" ellipsizeMode="tail" numberOfLines={2} color={theme.darkColor}>{item?.description}</Text>
                       </View>
 
                     </VStack>
-                    <VStack justifyContent="center" alignItems="center" >
-                      <Text fontSize={RFValue(12)} fontWeight="bold" color={theme.orange}>{`R$ ${item?.value}`}</Text>
+                    <VStack justifyContent="space-between" alignItems="flex-end" >
+                      <Text fontSize={16} fontWeight="bold" color={theme.orange}>{`R$ ${item?.value}`}</Text>
                       <Icon
                         as={<MaterialIcons name="add-circle" />}
                         size={10}
                         color={theme.successColor}
-                        onPress={() => console.log("Adiconar item")}
+                        onPress={() => adicionarPedido(item)}
                       />
                     </VStack>
                   </HStack>

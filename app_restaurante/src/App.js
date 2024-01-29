@@ -23,7 +23,6 @@ function App() {
   };
 
   useEffect(() => {
-    console.log("teste de inicio do app");
     verificarConexaoComInternet();
   }, []);
 

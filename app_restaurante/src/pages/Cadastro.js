@@ -1,18 +1,15 @@
-import { Center, Icon, Image, Pressable, ScrollView, Text, VStack, View } from "native-base";
+import { Icon, Pressable, ScrollView, Text, View, VStack } from "native-base";
 import React, { useEffect } from "react";
-import CadastroImg from '../assets/img/login.png';
-import LogoImg from '../assets/img/logo.png';
 import { Keyboard, TouchableWithoutFeedback } from "react-native";
-import { useAppContext } from "../context/AppContext";
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { Input } from "../components/input/Input";
 import theme from "../assets/theme";
-import { Button } from "../components/button/Button";
-import { RFValue } from "react-native-responsive-fontsize";
-import { validaAvatar, validaConfirmaSenha, validaEmail, validaNome, validaNomeUsuario, validaSenha } from "../utils/validacoes";
-import { handlePost } from "../services/service";
-import { errorMessage, infoMessage, successMessage } from "../components/toast/Toast";
 import { Background } from "../components/background/Background";
+import { Button } from "../components/button/Button";
+import { Input } from "../components/input/Input";
+import { errorMessage, infoMessage, successMessage } from "../components/toast/Toast";
+import { useAppContext } from "../context/AppContext";
+import { handlePost } from "../services/service";
+import { validaAvatar, validaConfirmaSenha, validaEmail, validaNome, validaNomeUsuario, validaSenha } from "../utils/validacoes";
 
 export const Cadastro = () => {
   const {
@@ -99,30 +96,20 @@ export const Cadastro = () => {
       onPress={Keyboard.dismiss}
       containerStyle={{ flex: 1 }}>
       <View flex={1}>
-        {/* <Image
-          w="full"
-          h="100%"
-          source={CadastroImg}
-          defaultSource={CadastroImg}
-          alt="Imagem de fundo"
-          resizeMode="cover"
-          opacity={0.2}
-          position="absolute"
-        /> */}
         <Background opacity={0.3} />
         <VStack pb={10} flex={1} bgColor={theme.overlayColor}>
 
           <View alignItems="center" my={4}>
-            <Text fontSize={RFValue(40)} py={0} fontWeight="bold" color={theme.orange}>
+            <Text fontSize={48} py={0} fontWeight="bold" color={theme.orange}>
               Chef's Menu
             </Text>
-            <Text color={theme.lightColor} fontSize={RFValue(25)} mb={4} fontWeight="bold">
+            <Text color={theme.lightColor} fontSize={32} mb={4} fontWeight="bold">
               Iniciar Cadastro
             </Text>
             {erro != '' && (
               <Text
                 color="yellow.300"
-                fontSize={RFValue(12)}
+                fontSize={16}
                 pb={2}
                 fontWeight="bold"
               >

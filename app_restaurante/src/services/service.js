@@ -2,7 +2,6 @@ import { errorMessage } from "../components/toast/Toast";
 import api from "./api";
 import { handleError } from "./helpers";
 import { handleGetAsyncStorage } from "./storage";
-import qs from "qs";
 
 export async function handlePost(url, params = {}) {
   try {
@@ -26,7 +25,7 @@ export async function handlePost(url, params = {}) {
     });
 
   } catch (error) {
-    console.log("erro ao pegar dados do usuario no storage", error);
+    console.log(error);
   }
 }
 
@@ -35,10 +34,6 @@ export async function handlePatch(url, params) {
   try {
     const { accessToken } = await handleGetAsyncStorage();
     if (accessToken !== null) {
-
-      console.log("url", url);
-
-      console.log("param novo", params);
 
       let config = {
         method: "patch",
@@ -62,7 +57,7 @@ export async function handlePatch(url, params) {
       errorMessage("Erro ao fazer requisição");
     }
   } catch (error) {
-    console.log("erro ao pegar dados da empresa no storage", error);
+    console.log("erro ao pegar token no storage", error);
   }
 }
 
@@ -93,19 +88,14 @@ export async function handleGetDefault(url) {
       errorMessage("Erro ao fazer requisição");
     }
   } catch (error) {
-    console.log("erro ao pegar dados da empresa no storage", error);
+    console.log("erro ao pegar dados token no storage", error);
   }
 }
 export async function handleGetWithParams(url, params) {
-  console.log("param", params);
   try {
     const { accessToken } = await handleGetAsyncStorage();
     if (accessToken !== null) {
-
-
       const urlComplete = `${url + params}`;
-
-      console.log("url", urlComplete);
 
       let config = {
         method: "get",
@@ -127,6 +117,6 @@ export async function handleGetWithParams(url, params) {
       errorMessage("Erro ao fazer requisição");
     }
   } catch (error) {
-    console.log("erro ao pegar dados da empresa no storage", error);
+    console.log("erro ao pegar token no storage", error);
   }
 }

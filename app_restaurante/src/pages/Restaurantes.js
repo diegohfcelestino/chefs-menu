@@ -1,15 +1,15 @@
+import { FlatList, HStack, Icon, Text, View, VStack } from "native-base";
 import React, { useEffect } from "react";
-import { View, Text, VStack, FlatList, HStack, Icon } from "native-base";
+import { ActivityIndicator, TouchableOpacity } from "react-native";
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import theme from "../assets/theme";
 import { Background } from "../components/background/Background";
 import { FooterMenu } from "../components/footerMenu/FooterMenu";
-import { RFValue } from "react-native-responsive-fontsize";
-import theme from "../assets/theme";
-import { handleGetDefault } from "../services/service";
-import { errorMessage, infoMessage } from "../components/toast/Toast";
 import { Image } from "../components/image/image";
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { errorMessage, infoMessage } from "../components/toast/Toast";
 import { useAppContext } from "../context/AppContext";
-import { ActivityIndicator, TouchableOpacity } from "react-native";
+import { handleGetDefault } from "../services/service";
+import SemImagem from '../assets/img/sem-imagem.png';
 
 export const Restaurantes = ({ route }) => {
 
@@ -189,10 +189,10 @@ export const Restaurantes = ({ route }) => {
       <Background opacity={0.4} />
       <HStack w="100%" bgColor={theme.overlayColor} h={16} flex={1} justifyContent="space-between" position="absolute" alignItems="center" top={0} >
         <VStack mr={6} flex={1} alignItems="flex-end">
-          <Text color={theme.whiteLight} fontSize={RFValue(14)} fontWeight="bold">
+          <Text color={theme.orange} fontSize={20} fontWeight="bold">
             {`Olá ${formUsuario?.nome ? formUsuario?.nome : ""}, seja bem vindo`}
           </Text>
-          <Text color={theme.whiteLight} fontSize={RFValue(12)} fontWeight="bold">Faça seu pedido!</Text>
+          <Text color={theme.whiteLight} fontSize={16} fontWeight="bold">Faça seu pedido!</Text>
         </VStack>
       </HStack>
       {loading ?
@@ -204,9 +204,9 @@ export const Restaurantes = ({ route }) => {
         <FlatList removeClippedSubviews={true} my={16} keyExtractor={item => item._id} flex={1} data={listaRestaurantes} renderItem={({ item }) =>
           <VStack flex={1} rounded="lg" pb={2} bgColor={theme.whiteLight} my={2} mx={2} shadow={3}>
             <TouchableOpacity onPress={() => navigation.navigate("Cardapio", item)}>
-              <Image w="full" h={32} source={{ uri: item.background }} rounded="lg" alt="Imagem de fundo do restaurante" />
+              <Image w="full" h={32} source={item.background ? { uri: item.background } : SemImagem} rounded="lg" alt="Imagem de fundo do restaurante" />
               <HStack mx={4}>
-                <Image mt={-4} size={20} source={{ uri: item.avatar }} rounded="full" alt="Imagem do avatar" />
+                <Image mt={-4} size={20} source={item.avatar ? { uri: item.avatar } : SemImagem} rounded="full" alt="Imagem do avatar" />
                 <VStack flex={1} pl={4}>
                   <View alignItems="flex-start" pt={1} >
                     <Text fontSize={20} fontWeight="bold" color={theme.darkColor}>{item?.name}</Text>

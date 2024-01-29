@@ -1,21 +1,18 @@
-import { Center, HStack, Icon, SectionList, Text, VStack, View } from "native-base";
+import { Center, HStack, Icon, SectionList, Text, View, VStack } from "native-base";
 import React, { useEffect, useState } from "react";
-import { ActivityIndicator, Keyboard, Linking, Pressable, TouchableOpacity, TouchableWithoutFeedback } from "react-native";
-import { RFValue } from "react-native-responsive-fontsize";
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { ActivityIndicator, Linking, TouchableOpacity } from "react-native";
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import theme from "../assets/theme";
 import { Background } from "../components/background/Background";
-import { FooterMenu } from "../components/footerMenu/FooterMenu";
+import { Drawer } from "../components/drawer/Drawer";
 import { Image } from "../components/image/image";
-import { Input } from "../components/input/Input";
 import { errorMessage, infoMessage } from "../components/toast/Toast";
 import { useAppContext } from "../context/AppContext";
 import { handleGetWithParams } from "../services/service";
-import { Drawer } from "../components/drawer/Drawer";
+import SemImagem from '../assets/img/sem-imagem.png';
 
 export const Cardapio = ({ route }) => {
-  console.log("routes", route);
   const {
     navigation,
     loading,
@@ -34,7 +31,6 @@ export const Cardapio = ({ route }) => {
     setLoading(true);
 
     handleGetWithParams("menu/idRestaurant/", route?.params?._id).then((response) => {
-      console.log("Retorno do restaurante id", response);
       if (response.data) {
         setListaCardapio(response.data.result);
         setNovaLista(response.data.result);
@@ -50,7 +46,7 @@ export const Cardapio = ({ route }) => {
       infoMessage(error ? error : "Tempo limite excedido");
       setListaCardapio([]);
       setNovaLista([]);
-      console.log("Pesquisa", error);
+      console.log("catch buscar cardápio", error);
       setLoading(false);
     }).finally(() => setLoading(false));
   }
@@ -82,20 +78,20 @@ export const Cardapio = ({ route }) => {
           <VStack rounded="lg" pb={2} bgColor={theme.whiteLight} my={2} mx={2} shadow={3}>
             <HStack mx={4}>
               <Center justifyContent="space-evenly">
-                <Image size={20} source={{ uri: dadosRestaurante?.avatar }} rounded="full" alt="Imagem do avatar" />
+                <Image size={20} source={dadosRestaurante?.avatar ? { uri: dadosRestaurante?.avatar } : SemImagem} rounded="full" alt="Imagem do avatar" />
                 <VStack alignItems="center">
                   <Icon
                     as={<MaterialIcons name="star" />}
                     size={8}
                     color={theme.orange}
                   />
-                  <Text fontSize={RFValue(10)} fontWeight="bold" textAlign='center' color={theme.orange}>{dadosRestaurante?.score}</Text>
+                  <Text fontSize={14} fontWeight="bold" textAlign='center' color={theme.orange}>{dadosRestaurante?.score}</Text>
                 </VStack>
               </Center>
               <VStack flex={1} pl={4}>
                 <View alignItems="flex-start" pt={1} >
-                  <Text fontSize={RFValue(16)} fontWeight="bold" color={theme.darkColor}>{`Restaurante: ${dadosRestaurante?.name}`}</Text>
-                  <Text fontSize={RFValue(10)} fontWeight="bold" ellipsizeMode="tail" numberOfLines={2} color={theme.darkColor}>{dadosRestaurante?.slogan}</Text>
+                  <Text fontSize={20} fontWeight="bold" color={theme.darkColor}>{`Restaurante: ${dadosRestaurante?.name}`}</Text>
+                  <Text fontSize={14} fontWeight="bold" ellipsizeMode="tail" numberOfLines={2} color={theme.darkColor}>{dadosRestaurante?.slogan}</Text>
                   <HStack alignItems="center">
                     <Icon
                       as={<MaterialIcons name="phone" />}
@@ -104,7 +100,7 @@ export const Cardapio = ({ route }) => {
                       color={theme.orange}
                       onPress={() => Linking.openURL(`tel:${dadosRestaurante?.telephone}`)}
                     />
-                    <Text fontSize={RFValue(10)} fontWeight="bold" textAlign='center' color={theme.darkColor}>{dadosRestaurante?.telephone}</Text>
+                    <Text fontSize={14} fontWeight="bold" textAlign='center' color={theme.darkColor}>{dadosRestaurante?.telephone}</Text>
                     <Icon
                       as={<MaterialCommunityIcons name="whatsapp" />}
                       size={7}
@@ -117,7 +113,7 @@ export const Cardapio = ({ route }) => {
                         )
                       }
                     />
-                    <Text fontSize={RFValue(10)} fontWeight="bold" textAlign='center' color={theme.darkColor}>{dadosRestaurante?.telephone}</Text>
+                    <Text fontSize={14} fontWeight="bold" textAlign='center' color={theme.darkColor}>{dadosRestaurante?.telephone}</Text>
                   </HStack>
                   <HStack alignItems="center" pr={6}>
                     <Icon
@@ -126,7 +122,7 @@ export const Cardapio = ({ route }) => {
                       mr={1}
                       color={theme.orange}
                     />
-                    <Text fontSize={RFValue(10)} fontWeight="bold" ellipsizeMode="tail" numberOfLines={2} textAlign='left' color={theme.darkColor}>{dadosRestaurante?.address}</Text>
+                    <Text fontSize={14} fontWeight="bold" ellipsizeMode="tail" numberOfLines={2} textAlign='left' color={theme.darkColor}>{dadosRestaurante?.address}</Text>
                   </HStack>
                 </View>
                 <HStack>
@@ -138,7 +134,7 @@ export const Cardapio = ({ route }) => {
                       mr={1}
                       color={theme.orange}
                     />
-                    <Text fontSize={RFValue(10)} fontWeight="bold" textAlign='center' color={theme.darkColor}>{dadosRestaurante?.deliveryTime}</Text>
+                    <Text fontSize={14} fontWeight="bold" textAlign='center' color={theme.darkColor}>{dadosRestaurante?.deliveryTime}</Text>
                   </HStack>
                   <HStack alignItems="center">
                     <Icon
@@ -148,7 +144,7 @@ export const Cardapio = ({ route }) => {
                       mr={1}
                       color={theme.orange}
                     />
-                    <Text fontSize={RFValue(10)} fontWeight="bold" textAlign='center' color={theme.darkColor}>{`R$ ${dadosRestaurante?.deliveryValue}`}</Text>
+                    <Text fontSize={14} fontWeight="bold" textAlign='center' color={theme.darkColor}>{`R$ ${dadosRestaurante?.deliveryValue}`}</Text>
                   </HStack>
                   <HStack alignItems="center">
                     <Icon
@@ -158,7 +154,7 @@ export const Cardapio = ({ route }) => {
                       mr={1}
                       color={theme.successColor}
                     />
-                    <Text fontSize={RFValue(10)} fontWeight="bold" textAlign='center' color={theme.darkColor}>Verificado</Text>
+                    <Text fontSize={14} fontWeight="bold" textAlign='center' color={theme.darkColor}>Verificado</Text>
                   </HStack>
                 </HStack>
               </VStack>
@@ -169,16 +165,16 @@ export const Cardapio = ({ route }) => {
           {listaCardapio.length > 0 &&
             <HStack mx={6} justifyContent="space-around" my={4}>
               <TouchableOpacity onPress={() => filtrarLista()}>
-                <Text fontWeight="bold" fontSize={RFValue(14)} color={color === "Todos" ? theme.orange : theme.whiteLight}>Todos</Text>
+                <Text fontWeight="bold" fontSize={20} color={color === "Todos" ? theme.orange : theme.whiteLight}>Todos</Text>
               </TouchableOpacity>
               <TouchableOpacity onPress={() => filtrarLista("Pratos")}>
-                <Text fontWeight="bold" fontSize={RFValue(14)} color={color === "Pratos" ? theme.orange : theme.whiteLight}>Pratos</Text>
+                <Text fontWeight="bold" fontSize={20} color={color === "Pratos" ? theme.orange : theme.whiteLight}>Pratos</Text>
               </TouchableOpacity>
               <TouchableOpacity onPress={() => filtrarLista("Bebidas")}>
-                <Text fontWeight="bold" fontSize={RFValue(14)} color={color === "Bebidas" ? theme.orange : theme.whiteLight}>Bebidas</Text>
+                <Text fontWeight="bold" fontSize={20} color={color === "Bebidas" ? theme.orange : theme.whiteLight}>Bebidas</Text>
               </TouchableOpacity>
               <TouchableOpacity onPress={() => filtrarLista("Sobremesas")}>
-                <Text fontWeight="bold" fontSize={RFValue(14)} color={color === "Sobremesas" ? theme.orange : theme.whiteLight}>Sobremesas</Text>
+                <Text fontWeight="bold" fontSize={20} color={color === "Sobremesas" ? theme.orange : theme.whiteLight}>Sobremesas</Text>
               </TouchableOpacity>
             </HStack>
           }
@@ -198,22 +194,22 @@ export const Cardapio = ({ route }) => {
               initialNumToRender={10}
               ListEmptyComponent={() =>
                 <Center w="full" bgColor={theme.overlayColor} py={4} px={1} mt={10} rounded="xl">
-                  <Text textAlign="center" fontSize={RFValue(20)} fontWeight="bold" color={theme.whiteLight}>Não há nenhum item cadastrado neste restaurante!</Text>
+                  <Text textAlign="center" fontSize={24} fontWeight="bold" color={theme.whiteLight}>Não há nenhum item cadastrado neste restaurante!</Text>
                 </Center>
               }
               // renderSectionHeader={({ section }) => (
-              //   <Text textAlign="center" fontWeight="bold" fontSize={RFValue(16)} color={theme.orange}>{section.title}</Text>
+              //   <Text textAlign="center" fontWeight="bold" fontSize={20} color={theme.orange}>{section.title}</Text>
               // )}
               renderItem={({ item, section }) =>
                 <VStack flex={1} rounded="lg" pb={2} bgColor={theme.whiteLight} my={2} mx={2} shadow={3} >
                   <TouchableOpacity onPress={() => navigation.navigate("CardapioDetalhe", item)}>
-                    <Image resizeMode="cover" w="full" h={24} source={{ uri: item.background }} rounded="lg" alt="Imagem do item" />
+                    <Image resizeMode="cover" w="full" h={24} source={dadosRestaurante?.avatar ? { uri: item?.background } : SemImagem} rounded="lg" alt="Imagem do item" />
                     <HStack alignItems="flex-end">
                       <VStack flex={1} px={4} >
                         <View alignItems="flex-start" pt={1} >
-                          <Text fontSize={RFValue(12)} fontWeight="bold" color={theme.darkColor}>{item?.name}</Text>
-                          <Text fontSize={RFValue(8)} fontWeight="bold" ellipsizeMode="tail" numberOfLines={2} color={theme.darkColor}>{item?.description}</Text>
-                          <Text fontSize={RFValue(12)} fontWeight="bold" color={theme.orange}>{`R$ ${item?.value}`}</Text>
+                          <Text fontSize={16} fontWeight="bold" color={theme.darkColor}>{item?.name}</Text>
+                          <Text fontSize={10} fontWeight="bold" ellipsizeMode="tail" numberOfLines={2} color={theme.darkColor}>{item?.description}</Text>
+                          <Text fontSize={16} fontWeight="bold" color={theme.orange}>{`R$ ${item?.value}`}</Text>
                         </View>
 
                       </VStack>

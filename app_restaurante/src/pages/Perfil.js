@@ -1,7 +1,7 @@
-import { HStack, Icon, Image, ScrollView, Text, VStack, View } from "native-base";
+import { HStack, Icon, Image, ScrollView, Text, View, VStack } from "native-base";
 import React, { useEffect, useState } from "react";
-import { ActivityIndicator, Keyboard, TouchableOpacity, TouchableWithoutFeedback } from "react-native";
-import { RFValue } from "react-native-responsive-fontsize";
+import { ActivityIndicator, Keyboard, TouchableWithoutFeedback } from "react-native";
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import theme from "../assets/theme";
 import { Background } from "../components/background/Background";
@@ -13,7 +13,7 @@ import { useAppContext } from "../context/AppContext";
 import { handleGetWithParams, handlePatch } from "../services/service";
 import { handleGetAsyncStorage, handleSetAsyncStorage } from "../services/storage";
 import { validaAvatar, validaEmail, validaNome, validaNomeUsuario } from "../utils/validacoes";
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import SemImagem from '../assets/img/sem-imagem.png';
 
 export const Perfil = ({ route }) => {
   const {
@@ -87,7 +87,6 @@ export const Perfil = ({ route }) => {
       background: formUsuario?.background
     };
     handlePatch(`user/${formUsuario?.id}`, params).then(async (response) => {
-      console.log("resposta", response);
       if (response?.data) {
         successMessage(response?.data?.message);
         buscarDadosAtualizados();
@@ -96,7 +95,7 @@ export const Perfil = ({ route }) => {
     }).catch((error) => {
       infoMessage(error ? error : "Tempo limite excedido");
       setLoading(false);
-      console.log("Catch login", error);
+      console.log("Catch alterar", error);
     }).finally(() => setLoading(false));
 
   }
@@ -148,8 +147,8 @@ export const Perfil = ({ route }) => {
         <VStack pb={16} flex={1} bgColor={theme.overlayColor}>
 
           <View alignItems="center" my={2}>
-            <HStack w="full" justifyContent="space-between" alignItems="center">
-              <Text fontSize={RFValue(40)} ml="15%" fontWeight="bold" color={theme.orange}>
+            <HStack w="full" justifyContent="space-evenly" alignItems="center">
+              <Text fontSize={52} fontWeight="bold" color={theme.orange}>
                 Chef's Menu
               </Text>
 
@@ -165,7 +164,7 @@ export const Perfil = ({ route }) => {
             {erro != '' && (
               <Text
                 color="yellow.300"
-                fontSize={RFValue(12)}
+                fontSize={26}
                 pb={2}
                 fontWeight="bold"
               >
@@ -182,10 +181,10 @@ export const Perfil = ({ route }) => {
 
             <>
               <HStack justifyContent="center" py={8} mb={6} mx={2}>
-                <Image position="absolute" top={0} w="full" h={56} px={10} source={{ uri: formUsuario?.background }} defaultSource={{ uri: formUsuario?.background }} rounded="lg" alt="Imagem de fundo do usuário" />
+                <Image position="absolute" top={0} w="full" h={56} px={10} source={formUsuario?.background ? { uri: formUsuario?.background } : SemImagem} defaultSource={{ uri: formUsuario?.background }} rounded="lg" alt="Imagem de fundo do usuário" />
                 <VStack alignItems="center">
-                  {formUsuario?.avatar && <Image size={32} source={{ uri: formUsuario?.avatar }} defaultSource={{ uri: formUsuario?.avatar }} rounded="full" alt="Imagem do usuário" />}
-                  <Text fontWeight="bold" fontSize={RFValue(24)} color={theme.whiteLight}>{formUsuario?.nome}</Text>
+                  <Image size={32} source={formUsuario?.avatar ? { uri: formUsuario?.avatar } : SemImagem} defaultSource={{ uri: formUsuario?.avatar }} rounded="full" alt="Imagem do usuário" />
+                  <Text fontWeight="bold" fontSize={32} color={theme.whiteLight}>{formUsuario?.nome}</Text>
                 </VStack>
               </HStack>
 

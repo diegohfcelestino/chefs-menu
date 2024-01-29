@@ -1,7 +1,6 @@
 import React from "react";
 import { View } from "native-base";
 import MenuDrawer from 'react-native-side-drawer';
-import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 
 const Drawer = (props) => {
 
@@ -11,7 +10,7 @@ const Drawer = (props) => {
         open={props.open}
         position={'right'}
         drawerContent={props.drawerContent}
-        drawerPercentage={RFValue(30)}
+        drawerPercentage={40}
         animationTime={300}
         overlay={true}
         opacity={0.2}

@@ -1,11 +1,9 @@
-import React from "react";
-import { Center, HStack, Icon, Text, VStack, View } from "native-base";
-import { IconHome } from "../../utils/icons";
-import theme from "../../assets/theme";
-import { RFValue } from "react-native-responsive-fontsize";
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { HStack, Icon, Text, VStack } from "native-base";
+import React from "react";
+import { TouchableOpacity } from "react-native";
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import theme from "../../assets/theme";
 
 const listaMenu = [
   {
@@ -46,7 +44,7 @@ export const FooterMenu = ({ color }) => {
               size={8}
               color={color === item.route ? theme.orange : theme.whiteLight}
             />
-            <Text color={color === item.route ? theme.orange : theme.whiteLight} fontSize={RFValue(10)}>{item.nome}</Text>
+            <Text color={color === item.route ? theme.orange : theme.whiteLight} fontSize={14}>{item.nome}</Text>
           </TouchableOpacity>
         </VStack>
       ))}

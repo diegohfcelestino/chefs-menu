@@ -1,20 +1,18 @@
-import React, { useCallback, useEffect, useState } from "react";
-import { Center, HStack, Icon, Image, KeyboardAvoidingView, Pressable, Text, VStack, View } from "native-base";
-import LoginImg from '../assets/img/login.png';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useFocusEffect } from "@react-navigation/native";
+import { HStack, Icon, Pressable, Text, View, VStack } from "native-base";
+import React, { useCallback } from "react";
 import { ActivityIndicator, Keyboard, TouchableOpacity, TouchableWithoutFeedback } from "react-native";
-import { IconArrowLeft, IconPerson, IconUserConfig } from "../utils/icons";
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import theme from "../assets/theme";
+import { Background } from "../components/background/Background";
 import { Button } from "../components/button/Button";
 import { Input } from "../components/input/Input";
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { infoMessage } from "../components/toast/Toast";
 import { useAppContext } from "../context/AppContext";
-import { RFValue } from "react-native-responsive-fontsize";
 import { handlePost } from "../services/service";
-import { errorMessage, infoMessage, successMessage } from "../components/toast/Toast";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { handleGetAsyncStorage, handleSetAsyncStorage } from "../services/storage";
-import { useFocusEffect } from "@react-navigation/native";
-import { Background } from "../components/background/Background";
+import { IconArrowLeft } from "../utils/icons";
 
 export const Login = () => {
   const {
@@ -95,17 +93,6 @@ export const Login = () => {
       onPress={Keyboard.dismiss}
       containerStyle={{ flex: 1 }}>
       <VStack flex={1}>
-        {/* <Image
-          w="full"
-          h="100%"
-          source={LoginImg}
-          defaultSource={LoginImg}
-          alt="Imagem de fundo"
-          resizeMode="cover"
-          opacity={0.3}
-          position="absolute"
-
-        /> */}
         <Background opacity={0.3} />
         <View flex={1} bgColor={theme.overlayColor}>
           <HStack justifyContent="space-between" alignItems="center" pt={10} px={5}>
@@ -116,9 +103,9 @@ export const Login = () => {
             </View>
 
             <VStack alignItems="flex-end">
-              <Text fontSize={RFValue(18)} fontWeight="bold" color={theme.whiteLight}>Não tem conta?</Text>
+              <Text fontSize={24} fontWeight="bold" color={theme.whiteLight}>Não tem conta?</Text>
               <TouchableOpacity onPress={() => navigation.navigate("Cadastro")} >
-                <Text fontSize={RFValue(20)} fontWeight="bold" color={theme.orange}>Cadastre-se</Text>
+                <Text fontSize={28} fontWeight="bold" color={theme.orange}>Cadastre-se</Text>
               </TouchableOpacity>
             </VStack>
           </HStack>

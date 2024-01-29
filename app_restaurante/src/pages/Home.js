@@ -1,11 +1,10 @@
-import { Button, Image, Text, View } from 'native-base';
-import React from 'react';
-import HomeImg from '../assets/img/home.png';
-import { IconArrowLeft, IconArrowRight } from '../utils/icons';
-import theme from '../assets/theme';
-import { TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { RFValue } from "react-native-responsive-fontsize";
+import { Image, Text, View } from 'native-base';
+import React from 'react';
+import { TouchableOpacity } from 'react-native';
+import HomeImg from '../assets/img/home.png';
+import theme from '../assets/theme';
+import { IconArrowRight } from '../utils/icons';
 
 export const Home = () => {
   const navigation = useNavigation();
@@ -21,9 +20,9 @@ export const Home = () => {
         position="absolute"
       />
       <View>
-        <View w="full" bgColor={theme.overlayColor} py={10} px={1}>
-          <Text textAlign="center" fontSize={RFValue(40)} pb={10} fontWeight="bold" color={theme.orange}>Chef's Menu</Text>
-          <Text textAlign="center" fontSize={RFValue(20)} fontWeight="bold" color={theme.whiteLight}>Os melhores restaurante da cidade!</Text>
+        <View w="full" bgColor={theme.overlayColor} py={8} px={1}>
+          <Text textAlign="center" fontSize={52} pb={10} fontWeight="bold" color={theme.orange}>Chef's Menu</Text>
+          <Text textAlign="center" fontSize={24} fontWeight="bold" color={theme.whiteLight}>Os melhores restaurante da cidade!</Text>
         </View>
       </View>
       <View bgColor={theme.whiteLight} justifyContent="center" alignItems="center" size={20} rounded="full" position="absolute" bottom={5} right={5}>

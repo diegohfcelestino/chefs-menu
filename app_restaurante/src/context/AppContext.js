@@ -1,19 +1,17 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
-import { HStack, Icon, Text, VStack, View } from "native-base";
+import { Icon, Text, View, VStack } from "native-base";
 import React, {
   createContext, useContext,
   useEffect,
   useState
 } from "react";
 import { Alert, TouchableOpacity } from "react-native";
-import theme from "../assets/theme";
-import { handleGetAsyncStorage, sairApp } from "../services/storage";
-import { IconHome, IconPerson, IconSignOut } from "../utils/icons";
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import { RFValue } from "react-native-responsive-fontsize";
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import theme from "../assets/theme";
 import { infoMessage, successMessage } from "../components/toast/Toast";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { handleGetAsyncStorage, sairApp } from "../services/storage";
 
 const AppContext = createContext();
 
@@ -41,7 +39,7 @@ export function AppProvider({ children }) {
   const [openDrawer, setOpenDrawer] = useState(false);
   const [listaRestaurantes, setListaRestaurantes] = useState([]);
   const [colorDrawer, setColorDrawer] = useState('');
-  const [listaPedidos, setListaPedidos] = useState("[]");
+  const [listaPedidos, setListaPedidos] = useState([]);
 
   const listaMenu = [
     {
@@ -70,18 +68,6 @@ export function AppProvider({ children }) {
     },
   ];
 
-  async function getUserStorage() {
-    console.log("Passando pelo getUser ");
-    try {
-      const { emailStorage, senhaStorage } = await handleGetAsyncStorage();
-      if (emailStorage !== null && senhaStorage !== null) {
-        setFormUsuario({ ...formUsuario, usuario: emailStorage, senha: senhaStorage });
-      }
-    } catch (error) {
-      console.log("erro ao pegar dados do usuário no storage", error);
-    }
-  }
-
   function sairDoAplicativo() {
     Alert.alert('Atenção', `Deseja realmente sair do aplicativo?`, [
       {
@@ -100,37 +86,6 @@ export function AppProvider({ children }) {
     ]);
   }
 
-  async function checkAccount() {
-    console.log("Chamou o checkAccount");
-    try {
-      console.log("entrou no try");
-      const { dataExpiraStorage } = await handleGetAsyncStorage();
-      if (dataExpiraStorage !== null) {
-        console.log("entrou no if do  try");
-        const dataString = JSON.parse(dataExpiraStorage);
-        const data = dataString?.dataExpira;
-        const dataAtual = new Date();
-        const dataTempo = data?.replace(" ", "T") + "Z";
-        const dataExpira = new Date(dataTempo);
-
-        dataExpira.setHours(dataExpira.getHours() - 1);
-
-        const isAuthenticated = dataExpira > dataAtual ? true : false;
-        console.log("Resposta da data do storage no useEffect", dataExpira);
-        console.log("Resposta da dataAtual do storage no useEffect", dataAtual);
-        if (!isAuthenticated) {
-          console.log("sair do app");
-          sairApp();
-        } else {
-          console.log("buscar usuário no storage");
-          getUserStorage();
-        }
-      }
-    } catch (error) {
-      console.log("erro ao pegar data expira do storage do useEffect", error);
-    }
-  }
-
   function drawerView() {
     return (
       <VStack flex={1} justifyContent="space-between" pb={24} bgColor={theme.overlayColor} alignItems="center" >
@@ -139,12 +94,12 @@ export function AppProvider({ children }) {
             <TouchableOpacity key={index} style={{ flexDirection: "row", alignItems: "center", marginTop: 15 }} onPress={() => { setColorDrawer(index); navigation.navigate(item.route); setOpenDrawer(false); }} >
               <Icon
                 as={<MaterialIcons name={item.icon} />}
-                size={12}
+                size={10}
                 color={colorDrawer === index ? theme.orange : theme.whiteLight}
                 mx={4}
               />
 
-              <Text color={colorDrawer === index ? theme.orange : theme.whiteLight} fontSize={RFValue(14)} fontWeight="bold">{item.nome}</Text>
+              <Text color={colorDrawer === index ? theme.orange : theme.whiteLight} fontSize={16} fontWeight="bold">{item.nome}</Text>
             </TouchableOpacity>
           ))}
 
@@ -152,11 +107,11 @@ export function AppProvider({ children }) {
         <TouchableOpacity onPress={() => sairDoAplicativo()} style={{ flexDirection: "row", alignItems: "center" }}>
           <Icon
             as={<FontAwesome name="sign-out" />}
-            size={12}
+            size={10}
             color={theme.dangerColor}
             mx={4}
           />
-          <Text color={theme.whiteLight} fontSize={RFValue(16)} fontWeight="bold">Sair</Text>
+          <Text color={theme.whiteLight} fontSize={20} fontWeight="bold">Sair</Text>
         </TouchableOpacity>
       </VStack>
     );
@@ -166,19 +121,16 @@ export function AppProvider({ children }) {
     navigation.goBack();
   }
 
-
-
   async function buscarListaPedidos() {
     setLoading(true);
     try {
       const { listaDePedidosStorage } = await handleGetAsyncStorage();
       if (listaDePedidosStorage !== null) {
-        setListaPedidos(listaDePedidosStorage);
+        setListaPedidos(JSON.parse(listaDePedidosStorage));
         setLoading(false);
 
       } else {
         setLoading(false);
-        console.log("não tem pedido no storage");
       }
     } catch (error) {
       console.log("erro ao pegar dados do pedido no storage", error);
@@ -201,26 +153,21 @@ export function AppProvider({ children }) {
     ]);
   }
 
-
   async function adicionarPedidoNoStorage(pedido) {
-    await buscarListaPedidos();
-    console.log("pedido", pedido);
-    let listaPedidosFormatada = JSON.parse(listaPedidos);
-    const listaFiltrada = listaPedidosFormatada?.filter(item => item?.id === pedido?.id);
-    console.log("listaFiltrada", listaFiltrada);
-    if (listaFiltrada.length == 0) {
-      listaPedidosFormatada.push(pedido);
-      setListaPedidos(listaPedidosFormatada);
-      AsyncStorage.setItem(`chefsMenu@listaDePedidos`, JSON.stringify(listaPedidosFormatada));
+    let newList = listaPedidos;
+    const listaFiltrada = listaPedidos?.filter(item => item?.id === pedido?.id);
+    if (listaFiltrada.length === 0) {
+      newList.push(pedido);
+      setListaPedidos(newList);
+      AsyncStorage.setItem(`chefsMenu@listaDePedidos`, JSON.stringify(newList));
       successMessage("Item adicionado ao pedido");
     } else {
       infoMessage("Este item já foi selecionado");
-      setListaPedidos([]);
     }
   }
 
   function removerPedido(item) {
-    Alert.alert('Olá', `Deseja adicionar este item no pedido?`, [
+    Alert.alert('Olá', `Deseja remover este item no pedido?`, [
       {
         text: 'Sim',
         onPress: () => {
@@ -235,21 +182,15 @@ export function AppProvider({ children }) {
   }
 
   async function removerPedidosNoStorage(pedido) {
-    let listaPedidosFormatada = JSON.parse(listaPedidos);
-    const listaFiltrada = listaPedidosFormatada.filter(item => item?.id === pedido?.id);
-    if (listaFiltrada.length == 1) {
-      listaPedidosFormatada.splice(listaPedidosFormatada.indexOf(pedido), 1);
-      setListaPedidos(listaPedidosFormatada);
-      AsyncStorage.setItem(`chefsMenu@listaDePedidos`, JSON.stringify(listaPedidosFormatada));
-      successMessage("Item removido com sucesso");
-    } else {
-      infoMessage("Item não está nos pedidos");
-    }
+    const listaFiltrada = listaPedidos.filter(item => item?.id !== pedido?.id);
+    setListaPedidos(listaFiltrada);
+    AsyncStorage.setItem(`chefsMenu@listaDePedidos`, JSON.stringify(listaFiltrada));
+    successMessage("Item removido com sucesso");
+    buscarListaPedidos();
   };
 
 
   useEffect(() => {
-    console.log("usando o context");
     setFormUsuario(initialFormUsuario);
   }, []);
 
@@ -268,8 +209,6 @@ export function AppProvider({ children }) {
     setErro,
     loading,
     setLoading,
-    getUserStorage,
-    checkAccount,
     openDrawer,
     setOpenDrawer,
     drawerView,

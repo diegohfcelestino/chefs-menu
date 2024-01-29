@@ -137,8 +137,8 @@ export const Pesquisar = ({ route }) => {
             )}
             renderItem={({ item, section }) =>
               <VStack flex={1} rounded="lg" pb={2} bgColor={theme.whiteLight} my={2} mx={2} shadow={3} >
-                <TouchableOpacity onPress={() => { console.log("Clicou no cardapio,", novaLista); }}>
-                  <Image resizeMode="cover" w="full" h={32} source={{ uri: item.background }} rounded="lg" alt="Imagem do item" />
+                <TouchableOpacity onPress={() => { console.log("Clicou no cardapio,", item); }}>
+                  <Image resizeMode="cover" w="full" h={24} source={{ uri: item.background }} rounded="lg" alt="Imagem do item" />
                   <HStack mx={4}>
                     <Image mt={-4} size={20} source={{ uri: item.avatarRestaurant }} rounded="full" alt="Imagem do avatar" />
                     <VStack flex={1} pl={4} >
@@ -148,6 +148,15 @@ export const Pesquisar = ({ route }) => {
                         <Text fontSize={RFValue(8)} fontWeight="bold" ellipsizeMode="tail" numberOfLines={2} color={theme.darkColor}>{item?.description}</Text>
                       </View>
 
+                    </VStack>
+                    <VStack justifyContent="center" alignItems="center" >
+                      <Text fontSize={RFValue(12)} fontWeight="bold" color={theme.orange}>{`R$ ${item?.value}`}</Text>
+                      <Icon
+                        as={<MaterialIcons name="add-circle" />}
+                        size={10}
+                        color={theme.successColor}
+                        onPress={() => console.log("Adiconar item")}
+                      />
                     </VStack>
                   </HStack>
                 </TouchableOpacity>

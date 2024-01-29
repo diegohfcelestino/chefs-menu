@@ -76,6 +76,9 @@ export const findAll = async (req, res) => {
       avatarRestaurant: item.restaurant.avatar,
       scoreRestaurant: item.restaurant.score,
       telephoneRestaurant: item.restaurant.telephone,
+      enderecoRestaurante: item.restaurant.address,
+      tempoEntregaRestaurante: item.restaurant.deliveryTime,
+      valorEntregaRestaurante: item.restaurant.deliveryValue,
 
     })).reduce((group, menu) => {
       const { type } = menu;
@@ -130,6 +133,9 @@ export const findByIdRestaurant = async (req, res) => {
       avatarRestaurant: item.restaurant.avatar,
       scoreRestaurant: item.restaurant.score,
       telephoneRestaurant: item.restaurant.telephone,
+      enderecoRestaurante: item.restaurant.address,
+      tempoEntregaRestaurante: item.restaurant.deliveryTime,
+      valorEntregaRestaurante: item.restaurant.deliveryValue,
 
     })).reduce((group, menu) => {
       const { type } = menu;
@@ -190,6 +196,9 @@ export const searchByText = async (req, res) => {
       avatarRestaurant: item.restaurant.avatar,
       scoreRestaurant: item.restaurant.score,
       telephoneRestaurant: item.restaurant.telephone,
+      enderecoRestaurante: item.restaurant.address,
+      tempoEntregaRestaurante: item.restaurant.deliveryTime,
+      valorEntregaRestaurante: item.restaurant.deliveryValue,
 
     })).reduce((group, menu) => {
       const { type } = menu;

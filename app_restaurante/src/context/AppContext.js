@@ -1,5 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
-import { Text, VStack } from "native-base";
+import { HStack, Icon, Text, VStack, View } from "native-base";
 import React, {
   createContext, useContext,
   useEffect,
@@ -9,6 +9,9 @@ import { Alert, TouchableOpacity } from "react-native";
 import theme from "../assets/theme";
 import { handleGetAsyncStorage, sairApp } from "../services/storage";
 import { IconHome, IconPerson, IconSignOut } from "../utils/icons";
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import { RFValue } from "react-native-responsive-fontsize";
 
 const AppContext = createContext();
 
@@ -35,6 +38,34 @@ export function AppProvider({ children }) {
   const [loading, setLoading] = useState(false);
   const [openDrawer, setOpenDrawer] = useState(false);
   const [listaRestaurantes, setListaRestaurantes] = useState([]);
+  const [colorDrawer, setColorDrawer] = useState('');
+
+  const listaMenu = [
+    {
+      id: 1,
+      nome: "Restaurantes",
+      icon: "home",
+      route: "Restaurantes"
+    },
+    {
+      id: 2,
+      nome: "Pesquisar",
+      icon: "search",
+      route: "Pesquisar"
+    },
+    {
+      id: 3,
+      nome: "Pedidos",
+      icon: "shopping-cart-checkout",
+      route: "Pedidos"
+    },
+    {
+      id: 4,
+      nome: "Perfil",
+      icon: "person",
+      route: "Perfil"
+    },
+  ];
 
   async function getUserStorage() {
     console.log("Passando pelo getUser ");
@@ -99,21 +130,30 @@ export function AppProvider({ children }) {
 
   function drawerView() {
     return (
-      <VStack flex={1} justifyContent="flex-start" py={10} bgColor={theme.lightColor} alignItems="flex-start" >
-        <TouchableOpacity onPress={() => { navigation.navigate('Home'); setOpenDrawer(false); }} style={{ flexDirection: "row", alignItems: "center", marginTop: 15 }}>
-          <IconHome style={{ marginHorizontal: 10 }} size={40} />
-          <Text fontSize={20} fontWeight="bold">Home</Text>
-        </TouchableOpacity>
+      <VStack flex={1} justifyContent="space-between" pb={24} bgColor={theme.overlayColor} alignItems="center" >
+        <View>
+          {listaMenu.map((item, index) => (
+            <TouchableOpacity key={index} style={{ flexDirection: "row", alignItems: "center", marginTop: 15 }} onPress={() => { setColorDrawer(index); navigation.navigate(item.route); setOpenDrawer(false); }} >
+              <Icon
+                as={<MaterialIcons name={item.icon} />}
+                size={12}
+                color={colorDrawer === index ? theme.orange : theme.whiteLight}
+                mx={4}
+              />
 
+              <Text color={colorDrawer === index ? theme.orange : theme.whiteLight} fontSize={RFValue(14)} fontWeight="bold">{item.nome}</Text>
+            </TouchableOpacity>
+          ))}
 
-        <TouchableOpacity onPress={() => { navigation.navigate('Usuario'); setOpenDrawer(false); }} style={{ flexDirection: "row", alignItems: "center", marginTop: 50 }}>
-          <IconPerson style={{ marginHorizontal: 10 }} size={30} />
-          <Text fontSize={20} fontWeight="bold">Trocar Empresa</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={() => sairDoAplicativo()} style={{ flexDirection: "row", alignItems: "center", marginTop: 15 }}>
-          <IconSignOut style={{ marginHorizontal: 10 }} size={40} />
-          <Text fontSize={20} fontWeight="bold">Sair</Text>
+        </View>
+        <TouchableOpacity onPress={() => sairDoAplicativo()} style={{ flexDirection: "row", alignItems: "center" }}>
+          <Icon
+            as={<FontAwesome name="sign-out" />}
+            size={12}
+            color={theme.dangerColor}
+            mx={4}
+          />
+          <Text color={theme.whiteLight} fontSize={RFValue(16)} fontWeight="bold">Sair</Text>
         </TouchableOpacity>
       </VStack>
     );
@@ -152,7 +192,8 @@ export function AppProvider({ children }) {
     handleGoBack,
     salvarUsuario, setSalvarUsuario,
     listaRestaurantes,
-    setListaRestaurantes
+    setListaRestaurantes,
+    colorDrawer, setColorDrawer, sairDoAplicativo
   };
 
 

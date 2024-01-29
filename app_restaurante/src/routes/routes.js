@@ -11,6 +11,9 @@ import { Cadastro } from "../pages/Cadastro";
 import { Restaurante, Restaurantes } from "../pages/Restaurantes";
 import { Pesquisar } from "../pages/Pesquisar";
 import { Perfil } from "../pages/Perfil";
+import { Cardapio } from "../pages/Cardapio";
+import { CardapioDetalhe } from "../pages/CardapioDetalhe";
+import { Pedidos } from "../pages/Pedidos";
 const Stack = createNativeStackNavigator();
 
 const Routes = () => {
@@ -22,9 +25,9 @@ const Routes = () => {
       initialRouteName={"Home"}
       screenOptions={{
         headerMode: 'screen',
-        headerTintColor: theme.darkColor,
+        headerTintColor: theme.orange,
         headerTitleStyle: { fontSize: RFValue(20), fontWeight: 'bold' },
-        headerStyle: { backgroundColor: theme.lightColor },
+        headerStyle: { backgroundColor: theme.darkColor },
         headerTitleAlign: "center",
         headerBackTitle: "Voltar",
         headerBackTitleVisible: true,
@@ -92,6 +95,18 @@ const Routes = () => {
         }}
       />
       <Stack.Screen
+        name="Pedidos"
+        component={Pedidos}
+        options={{
+          headerShown: false,
+          headerTitle: "Pedidos",
+          animationTypeForReplace: 'push',
+          headerBackVisible: false,
+          headerBackTitleVisible: false,
+
+        }}
+      />
+      <Stack.Screen
         name="Perfil"
         component={Perfil}
         options={{
@@ -103,27 +118,53 @@ const Routes = () => {
 
         }}
       />
-
-      {/* <Stack.Screen
-        name="Login"
-        component={Login}
+      <Stack.Screen
+        name="Cardapio"
+        component={Cardapio}
         options={({ navigation }) => ({
-          headerTitle: "Login",
-          headerTitleStyle: { flex: 1, fontSize: RFValue(20), fontWeight: 'bold' },
+          headerTitle: "Cardapio",
           animationTypeForReplace: 'push',
           headerBackVisible: false,
           headerBackTitleVisible: false,
+          headerLeft: () => (
+            <IconArrowLeft size={25} style={{ padding: 10 }} onPress={() => navigation.goBack()} color={theme.whiteLight} />
+          ),
           headerRight: () => (
             openDrawer ?
               <IconCloseMenu size={30} style={{ padding: 10 }} onPress={() => {
                 setOpenDrawer(!openDrawer);
-              }} color={theme.blue} /> :
+              }} color={theme.whiteLight} /> :
               <IconOpenMenu size={30} style={{ padding: 10 }} onPress={() => {
                 setOpenDrawer(!openDrawer);
-              }} color={theme.blue} />
+              }} color={theme.whiteLight} />
           )
+
         })}
-      /> */}
+      />
+      <Stack.Screen
+        name="CardapioDetalhe"
+        component={CardapioDetalhe}
+        options={({ navigation }) => ({
+          headerTitle: "Detalhe do cardápio",
+          animationTypeForReplace: 'push',
+          headerBackVisible: false,
+          headerBackTitleVisible: false,
+          headerLeft: () => (
+            <IconArrowLeft size={25} style={{ padding: 10 }} onPress={() => navigation.goBack()} color={theme.whiteLight} />
+          ),
+          headerRight: () => (
+            openDrawer ?
+              <IconCloseMenu size={30} style={{ padding: 10 }} onPress={() => {
+                setOpenDrawer(!openDrawer);
+              }} color={theme.whiteLight} /> :
+              <IconOpenMenu size={30} style={{ padding: 10 }} onPress={() => {
+                setOpenDrawer(!openDrawer);
+              }} color={theme.whiteLight} />
+          )
+
+        })}
+      />
+
     </Stack.Navigator>
   );
 

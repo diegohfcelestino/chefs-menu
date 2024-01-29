@@ -1,46 +1,37 @@
-import { Center, HStack, Icon, Image, Pressable, ScrollView, Text, VStack, View } from "native-base";
+import { HStack, Icon, Image, ScrollView, Text, VStack, View } from "native-base";
 import React, { useEffect, useState } from "react";
-import CadastroImg from '../assets/img/login.png';
-import LogoImg from '../assets/img/logo.png';
-import { ActivityIndicator, Keyboard, TouchableWithoutFeedback } from "react-native";
-import { useAppContext } from "../context/AppContext";
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { Input } from "../components/input/Input";
-import theme from "../assets/theme";
-import { Button } from "../components/button/Button";
+import { ActivityIndicator, Keyboard, TouchableOpacity, TouchableWithoutFeedback } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
-import { validaAvatar, validaConfirmaSenha, validaEmail, validaNome, validaNomeUsuario, validaSenha } from "../utils/validacoes";
-import { handleGetWithParams, handlePatch, handlePost } from "../services/service";
-import { errorMessage, infoMessage, successMessage } from "../components/toast/Toast";
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import theme from "../assets/theme";
 import { Background } from "../components/background/Background";
+import { Button } from "../components/button/Button";
 import { FooterMenu } from "../components/footerMenu/FooterMenu";
+import { Input } from "../components/input/Input";
+import { errorMessage, infoMessage, successMessage } from "../components/toast/Toast";
+import { useAppContext } from "../context/AppContext";
+import { handleGetWithParams, handlePatch } from "../services/service";
 import { handleGetAsyncStorage, handleSetAsyncStorage } from "../services/storage";
+import { validaAvatar, validaEmail, validaNome, validaNomeUsuario } from "../utils/validacoes";
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 export const Perfil = ({ route }) => {
   const {
-    navigation,
     formUsuario,
     setFormUsuario,
-    showSenha,
-    setShowSenha,
-    showConfirmaSenha,
-    setShowConfirmaSenha,
     erro,
     setErro,
-    handleGoBack,
     loading,
     setLoading,
-    initialFormUsuario
+    sairDoAplicativo
   } = useAppContext();
 
-  const [editar, setEditar] = useState(true);
+  const [editar, setEditar] = useState(false);
 
   const validarInput = () => {
     const nomeEValido = validaNome(formUsuario?.nome);
     const nomeUsuarioEValido = validaNomeUsuario(formUsuario?.nomeUsuario);
     const emailEValido = validaEmail(formUsuario?.usuario);
-    const senhaEvalida = validaSenha(formUsuario?.senha);
-    const confirmaSenhaEValida = validaConfirmaSenha(formUsuario?.senha, formUsuario?.confirmaSenha);
     const avatarEValido = validaAvatar(formUsuario?.avatar);
     const backgroundEValido = validaAvatar(formUsuario?.background);
 
@@ -50,10 +41,6 @@ export const Perfil = ({ route }) => {
       setErro('Nome usuário deve ter mais de 6 caracteres!');
     } else if (!emailEValido && formUsuario?.usuario !== '') {
       setErro('Email inválido!');
-    } else if (!senhaEvalida && formUsuario?.senha !== '') {
-      setErro('Senha curta');
-    } else if (!confirmaSenhaEValida && formUsuario?.confirmaSenha !== '') {
-      setErro('Senhas estão diferentes');
     } else if (!avatarEValido && formUsuario?.avatar !== '') {
       setErro('Link inválido');
     } else if (!backgroundEValido && formUsuario?.background !== '') {
@@ -101,10 +88,10 @@ export const Perfil = ({ route }) => {
     };
     handlePatch(`user/${formUsuario?.id}`, params).then(async (response) => {
       console.log("resposta", response);
-      // if (response) {
-      //   successMessage(response.message);
-      //   buscarDadosAtualizados();
-      // }
+      if (response?.data) {
+        successMessage(response?.data?.message);
+        buscarDadosAtualizados();
+      }
       setLoading(false);
     }).catch((error) => {
       infoMessage(error ? error : "Tempo limite excedido");
@@ -160,10 +147,20 @@ export const Perfil = ({ route }) => {
         <Background opacity={0.3} />
         <VStack pb={16} flex={1} bgColor={theme.overlayColor}>
 
-          <View alignItems="center" my={4}>
-            <Text fontSize={RFValue(40)} py={0} fontWeight="bold" color={theme.orange}>
-              Chef's Menu
-            </Text>
+          <View alignItems="center" my={2}>
+            <HStack w="full" justifyContent="space-between" alignItems="center">
+              <Text fontSize={RFValue(40)} ml="15%" fontWeight="bold" color={theme.orange}>
+                Chef's Menu
+              </Text>
+
+              <Icon
+                as={<FontAwesome name="sign-out" />}
+                size={10}
+                color={theme.dangerColor}
+                mx={4}
+                onPress={() => sairDoAplicativo()}
+              />
+            </HStack>
 
             {erro != '' && (
               <Text
@@ -184,10 +181,11 @@ export const Perfil = ({ route }) => {
             :
 
             <>
-              <HStack justifyContent="center" my={8}>
-                <VStack>
+              <HStack justifyContent="center" py={8} mb={6} mx={2}>
+                <Image position="absolute" top={0} w="full" h={56} px={10} source={{ uri: formUsuario?.background }} defaultSource={{ uri: formUsuario?.background }} rounded="lg" alt="Imagem de fundo do usuário" />
+                <VStack alignItems="center">
                   {formUsuario?.avatar && <Image size={32} source={{ uri: formUsuario?.avatar }} defaultSource={{ uri: formUsuario?.avatar }} rounded="full" alt="Imagem do usuário" />}
-                  <Text fontSize={RFValue(20)} color={theme.whiteLight}>{formUsuario?.nome}</Text>
+                  <Text fontWeight="bold" fontSize={RFValue(24)} color={theme.whiteLight}>{formUsuario?.nome}</Text>
                 </VStack>
               </HStack>
 
@@ -207,7 +205,7 @@ export const Perfil = ({ route }) => {
                     }
                     onChangeText={(e) => setFormUsuario({ ...formUsuario, nome: e })}
                     value={formUsuario?.nome}
-                    editable={!editar}
+                    editable={editar}
                   />
                   <Input
                     placeholder="Informe seu nome de usuário"
@@ -222,7 +220,7 @@ export const Perfil = ({ route }) => {
                     }
                     onChangeText={(e) => setFormUsuario({ ...formUsuario, nomeUsuario: e })}
                     value={formUsuario?.nomeUsuario}
-                    editable={!editar}
+                    editable={editar}
                   />
                   <Input
                     placeholder="Informe seu e-mail"
@@ -238,71 +236,8 @@ export const Perfil = ({ route }) => {
                     }
                     onChangeText={e => setFormUsuario({ ...formUsuario, usuario: e })}
                     value={formUsuario?.usuario}
-                    editable={!editar}
+                    editable={editar}
                   />
-                  {/* {!editar ?
-                    <>
-                      <Input
-                        placeholder="Senha"
-                        type={showSenha ? 'text' : 'password'}
-                        InputLeftElement={
-                          <Icon
-                            as={<MaterialIcons name="lock-outline" />}
-                            size={7}
-                            ml="2"
-                            color={theme.orange}
-                          />
-                        }
-                        InputRightElement={
-                          <Pressable onPress={() => setShowSenha(!showSenha)}>
-                            <Icon
-                              as={
-                                <MaterialIcons
-                                  name={showSenha ? 'visibility' : 'visibility-off'}
-                                />
-                              }
-                              size={7}
-                              mr="2"
-                              color={theme.orange}
-                            />
-                          </Pressable>
-                        }
-                        onChangeText={e => setFormUsuario({ ...formUsuario, senha: e })}
-                        value={formUsuario?.senha}
-                        editable={!editar}
-                      />
-
-                      <Input
-                        placeholder="Confirmar Senha"
-                        type={showConfirmaSenha ? 'text' : 'password'}
-                        InputLeftElement={
-                          <Icon
-                            as={<MaterialIcons name="lock-outline" />}
-                            size={7}
-                            ml="2"
-                            color={theme.orange}
-                          />
-                        }
-                        InputRightElement={
-                          <Pressable onPress={() => setShowConfirmaSenha(!showConfirmaSenha)}>
-                            <Icon
-                              as={
-                                <MaterialIcons
-                                  name={showConfirmaSenha ? 'visibility' : 'visibility-off'}
-                                />
-                              }
-                              size={7}
-                              mr="2"
-                              color={theme.orange}
-                            />
-                          </Pressable>
-                        }
-                        onChangeText={e => setFormUsuario({ ...formUsuario, confirmaSenha: e })}
-                        value={formUsuario?.confirmaSenha}
-                        editable={!editar}
-                      />
-                    </>
-                    : null} */}
                   <Input
                     placeholder="Informe o link de seu avatar"
                     autoCapitalize="none"
@@ -316,7 +251,7 @@ export const Perfil = ({ route }) => {
                     }
                     onChangeText={(e) => setFormUsuario({ ...formUsuario, avatar: e })}
                     value={formUsuario?.avatar}
-                    editable={!editar}
+                    editable={editar}
                   />
                   <Input
                     placeholder="Informe o link de sua imagem de fundo"
@@ -331,19 +266,20 @@ export const Perfil = ({ route }) => {
                     }
                     onChangeText={(e) => setFormUsuario({ ...formUsuario, background: e })}
                     value={formUsuario?.background}
-                    editable={!editar}
+                    editable={editar}
                   />
                 </VStack>
 
               </ScrollView>
 
-              <HStack mx={10} my={4} justifyContent="space-between" alignItems="center">
+              <HStack mx={12} my={4} justifyContent="space-between" alignItems="center">
                 <Button
                   h={12}
                   w="45%"
-                  title={editar ? "Alterar dados" : "Cancelar Edição"}
+                  title={!editar ? "Alterar dados" : "Cancelar Edição"}
                   onPress={() => setEditar(!editar)}
                   isLoading={loading}
+                  bg={editar ? theme.dangerColor : theme.orange}
                 />
                 <Button
                   w="45%"
@@ -351,9 +287,8 @@ export const Perfil = ({ route }) => {
                   color={theme.lightColor}
                   disabled={erro}
                   title="Salvar"
-                  isDisabled={editar}
+                  isDisabled={!editar}
                   isLoading={loading}
-                  bg={theme.orange}
                   onPress={() => alterar()}
                 />
 

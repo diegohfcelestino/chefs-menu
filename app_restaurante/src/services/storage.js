@@ -7,7 +7,7 @@ export function sairApp(fnCallBack = () => { }) {
       "chefsMenu@accessToken",
       "chefsMenu@email",
       "chefsMenu@password",
-      "chefsMenu@user",
+      "chefsMenu@usuario",
       "chefsMenu@salvarUsuario",
     ], fnCallBack);
   } catch (error) {
@@ -28,12 +28,14 @@ export const handleGetAsyncStorage = async () => {
   const emailStorage = await AsyncStorage.getItem('chefsMenu@email');
   const senhaStorage = await AsyncStorage.getItem('chefsMenu@password');
   const validaUsuario = await AsyncStorage.getItem('chefsMenu@salvarUsuario');
+  const listaDePedidosStorage = await AsyncStorage.getItem('chefsMenu@listaDePedidos');
 
   return {
     accessToken,
     dadosUsuario,
     emailStorage,
     senhaStorage,
-    validaUsuario
+    validaUsuario,
+    listaDePedidosStorage
   };
 };

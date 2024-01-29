@@ -15,11 +15,11 @@ export const Restaurantes = ({ route }) => {
 
   const {
     navigation,
+    formUsuario,
     loading,
     setLoading,
     listaRestaurantes,
     setListaRestaurantes,
-    nomeUsuario
   } = useAppContext();
 
   let listaLocal = [
@@ -190,7 +190,7 @@ export const Restaurantes = ({ route }) => {
       <HStack w="100%" bgColor={theme.overlayColor} h={16} flex={1} justifyContent="space-between" position="absolute" alignItems="center" top={0} >
         <VStack mr={6} flex={1} alignItems="flex-end">
           <Text color={theme.whiteLight} fontSize={RFValue(14)} fontWeight="bold">
-            {`Olá ${nomeUsuario ? nomeUsuario : ""}, seja bem vindo`}
+            {`Olá ${formUsuario?.nome ? formUsuario?.nome : ""}, seja bem vindo`}
           </Text>
           <Text color={theme.whiteLight} fontSize={RFValue(12)} fontWeight="bold">Faça seu pedido!</Text>
         </VStack>
@@ -203,7 +203,7 @@ export const Restaurantes = ({ route }) => {
         :
         <FlatList removeClippedSubviews={true} my={16} keyExtractor={item => item._id} flex={1} data={listaRestaurantes} renderItem={({ item }) =>
           <VStack flex={1} rounded="lg" pb={2} bgColor={theme.whiteLight} my={2} mx={2} shadow={3}>
-            <TouchableOpacity onPress={() => { console.log("Clicou no restaurante,", item.background); }}>
+            <TouchableOpacity onPress={() => navigation.navigate("Cardapio", item)}>
               <Image w="full" h={32} source={{ uri: item.background }} rounded="lg" alt="Imagem de fundo do restaurante" />
               <HStack mx={4}>
                 <Image mt={-4} size={20} source={{ uri: item.avatar }} rounded="full" alt="Imagem do avatar" />

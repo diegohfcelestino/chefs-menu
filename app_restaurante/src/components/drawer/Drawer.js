@@ -6,7 +6,7 @@ import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 const Drawer = (props) => {
 
   return (
-    <View flex={1} justifyContent="center" alignItems="center" zIndex={0}>
+    <View flex={1} zIndex={0}>
       <MenuDrawer
         open={props.open}
         position={'right'}

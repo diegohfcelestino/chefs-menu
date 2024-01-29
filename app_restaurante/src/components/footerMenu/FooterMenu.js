@@ -10,7 +10,7 @@ import { useNavigation } from "@react-navigation/native";
 const listaMenu = [
   {
     id: 1,
-    nome: "Inicio",
+    nome: "Restaurantes",
     icon: "home",
     route: "Restaurantes"
   },
@@ -43,10 +43,10 @@ export const FooterMenu = ({ color }) => {
           <TouchableOpacity style={{ alignItems: "center", marginHorizontal: 12 }} onPress={() => navigation.navigate(item.route)} >
             <Icon
               as={<MaterialIcons name={item.icon} />}
-              size={9}
+              size={8}
               color={color === item.route ? theme.orange : theme.whiteLight}
             />
-            <Text color={color === item.route ? theme.orange : theme.whiteLight} fontSize={RFValue(12)}>{item.nome}</Text>
+            <Text color={color === item.route ? theme.orange : theme.whiteLight} fontSize={RFValue(10)}>{item.nome}</Text>
           </TouchableOpacity>
         </VStack>
       ))}

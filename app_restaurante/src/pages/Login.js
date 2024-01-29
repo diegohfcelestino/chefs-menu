@@ -45,6 +45,16 @@ export const Login = () => {
       handlePost("auth", params).then(async (response) => {
         if (response.data.token) {
           await salvarDadosStorage(response?.data);
+          setFormUsuario({
+            ...formUsuario,
+            id: response?.data?.id,
+            nome: response?.data?.name,
+            nomeUsuario: response?.data?.username,
+            usuario: response?.data?.email,
+            avatar: response?.data?.avatar,
+            background: response?.data?.background,
+
+          });
         }
         if (salvarUsuario) {
           AsyncStorage.setItem('chefsMenu@salvarUsuario', "sim");

@@ -1,6 +1,6 @@
 import { Center, FlatList, HStack, Icon, Text, View, VStack } from "native-base";
 import React, { useEffect } from "react";
-import { ActivityIndicator } from "react-native";
+import { ActivityIndicator, TouchableOpacity } from "react-native";
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import SemImagem from '../assets/img/sem-imagem.png';
 import theme from "../assets/theme";
@@ -40,8 +40,8 @@ export const Pedidos = ({ route }) => {
       <View w="100%" flex={1} pb={2}>
         <Background opacity={0.4} />
         <HStack w="100%" bgColor={theme.overlayColor} h={32} flex={1} justifyContent="space-between" position="absolute" alignItems="center" top={0} >
-          <VStack mr={6} flex={1} alignItems="center">
-            <Text fontSize={52} ml="15%" fontWeight="bold" color={theme.orange}>
+          <VStack flex={1} alignItems="center">
+            <Text fontSize={52} fontWeight="bold" color={theme.orange}>
               Chef's Menu
             </Text>
             <Text color={theme.whiteLight} fontSize={20} fontWeight="bold">
@@ -65,26 +65,28 @@ export const Pedidos = ({ route }) => {
             }
             renderItem={({ item }) =>
               <VStack flex={1} rounded="lg" pb={2} bgColor={theme.whiteLight} my={2} mx={2} shadow={3}>
+                <TouchableOpacity onPress={() => navigation.navigate("CardapioDetalhe", item)}>
+                  <Image resizeMode="cover" w="full" h={24} source={item.background ? { uri: item.background } : SemImagem} rounded="lg" alt="Imagem do item" />
+                  <HStack alignItems="flex-end">
+                    <VStack flex={1} px={4} >
+                      <View alignItems="flex-start" pt={1} >
+                        <Text fontSize={20} fontWeight="bold" color={theme.orange}>{item?.nameRestaurant}</Text>
+                        <Text fontSize={16} fontWeight="bold" color={theme.darkColor}>{item?.name}</Text>
+                        <Text fontSize={12} fontWeight="bold" ellipsizeMode="tail" numberOfLines={2} color={theme.darkColor}>{item?.description}</Text>
+                        <Text fontSize={14} fontWeight="bold" color={theme.orange}>{`R$ ${item?.value}`}</Text>
+                      </View>
 
-                <Image resizeMode="cover" w="full" h={24} source={item.background ? { uri: item.background } : SemImagem} rounded="lg" alt="Imagem do item" />
-                <HStack alignItems="flex-end">
-                  <VStack flex={1} px={4} >
-                    <View alignItems="flex-start" pt={1} >
-                      <Text fontSize={16} fontWeight="bold" color={theme.darkColor}>{item?.name}</Text>
-                      <Text fontSize={12} fontWeight="bold" ellipsizeMode="tail" numberOfLines={2} color={theme.darkColor}>{item?.description}</Text>
-                      <Text fontSize={14} fontWeight="bold" color={theme.orange}>{`R$ ${item?.value}`}</Text>
-                    </View>
-
-                  </VStack>
-                  <Icon
-                    as={<FontAwesome name="remove" />}
-                    size={10}
-                    mr={4}
-                    mb={2}
-                    color={theme.dangerColor}
-                    onPress={() => remover(item)}
-                  />
-                </HStack>
+                    </VStack>
+                    <Icon
+                      as={<FontAwesome name="remove" />}
+                      size={10}
+                      mr={4}
+                      mb={2}
+                      color={theme.dangerColor}
+                      onPress={() => remover(item)}
+                    />
+                  </HStack>
+                </TouchableOpacity>
               </VStack>
             } />
 

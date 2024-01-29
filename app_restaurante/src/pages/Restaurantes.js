@@ -206,27 +206,29 @@ export const Restaurantes = ({ route }) => {
             <TouchableOpacity onPress={() => navigation.navigate("Cardapio", item)}>
               <Image w="full" h={32} source={item.background ? { uri: item.background } : SemImagem} rounded="lg" alt="Imagem de fundo do restaurante" />
               <HStack mx={4}>
-                <Image mt={-4} size={20} source={item.avatar ? { uri: item.avatar } : SemImagem} rounded="full" alt="Imagem do avatar" />
-                <VStack flex={1} pl={4}>
+                <VStack alignItems="center">
+                  <Image mt={-4} size={20} source={item.avatar ? { uri: item.avatar } : SemImagem} rounded="full" alt="Imagem do avatar" />
+                  <HStack alignItems="center">
+                    <Icon
+                      as={<MaterialIcons name="star" />}
+                      size={7}
+                      color={theme.orange}
+                      mr={1}
+                    />
+                    <Text fontSize={14} fontWeight="bold" textAlign='center' color={theme.darkColor}>{item?.score}</Text>
+                  </HStack>
+                </VStack>
+                <VStack flex={1} pl={4} >
                   <View alignItems="flex-start" pt={1} >
                     <Text fontSize={20} fontWeight="bold" color={theme.darkColor}>{item?.name}</Text>
                     <Text fontSize={14} fontWeight="bold" ellipsizeMode="tail" numberOfLines={2} color={theme.darkColor}>{item?.slogan}</Text>
                   </View>
-                  <HStack>
-                    <HStack alignItems="center">
-                      <Icon
-                        as={<MaterialIcons name="star" />}
-                        size={7}
-                        color={theme.orange}
-                        mr={1}
-                      />
-                      <Text fontSize={14} fontWeight="bold" textAlign='center' color={theme.darkColor}>{item?.score}</Text>
-                    </HStack>
+                  <HStack justifyContent="space-between">
+
                     <HStack alignItems="center">
                       <Icon
                         as={<MaterialIcons name="access-time" />}
-                        size={7}
-                        ml={6}
+                        size={6}
                         mr={1}
                         color={theme.orange}
                       />
@@ -235,12 +237,22 @@ export const Restaurantes = ({ route }) => {
                     <HStack alignItems="center">
                       <Icon
                         as={<MaterialIcons name="confirmation-number" />}
-                        size={7}
+                        size={6}
                         ml={6}
                         mr={1}
                         color={theme.orange}
                       />
                       <Text fontSize={14} fontWeight="bold" textAlign='center' color={theme.darkColor}>{`R$ ${item?.deliveryValue}`}</Text>
+                    </HStack>
+                    <HStack alignItems="center">
+                      <Icon
+                        as={<MaterialIcons name="verified" />}
+                        size={6}
+                        ml={6}
+                        mr={1}
+                        color={theme.successColor}
+                      />
+
                     </HStack>
                   </HStack>
                 </VStack>

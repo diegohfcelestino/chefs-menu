@@ -145,7 +145,6 @@ export const Perfil = ({ route }) => {
       <View flex={1}>
         <Background opacity={0.3} />
         <VStack pb={16} flex={1} bgColor={theme.overlayColor}>
-
           <View alignItems="center" my={2}>
             <HStack w="full" justifyContent="space-evenly" alignItems="center">
               <Text fontSize={52} fontWeight="bold" color={theme.orange}>

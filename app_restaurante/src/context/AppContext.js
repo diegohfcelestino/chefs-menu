@@ -88,15 +88,15 @@ export function AppProvider({ children }) {
 
   function drawerView() {
     return (
-      <VStack flex={1} justifyContent="space-between" pb={24} bgColor={theme.overlayColor} alignItems="center" >
+      <VStack flex={1} justifyContent="space-between" pb={24} bgColor={theme.overlayColor} alignItems="flex-start" >
         <View>
           {listaMenu.map((item, index) => (
             <TouchableOpacity key={index} style={{ flexDirection: "row", alignItems: "center", marginTop: 15 }} onPress={() => { setColorDrawer(index); navigation.navigate(item.route); setOpenDrawer(false); }} >
               <Icon
                 as={<MaterialIcons name={item.icon} />}
-                size={10}
+                size={8}
                 color={colorDrawer === index ? theme.orange : theme.whiteLight}
-                mx={4}
+                mx={2}
               />
 
               <Text color={colorDrawer === index ? theme.orange : theme.whiteLight} fontSize={16} fontWeight="bold">{item.nome}</Text>
@@ -109,9 +109,9 @@ export function AppProvider({ children }) {
             as={<FontAwesome name="sign-out" />}
             size={10}
             color={theme.dangerColor}
-            mx={4}
+            mx={2}
           />
-          <Text color={theme.whiteLight} fontSize={20} fontWeight="bold">Sair</Text>
+          <Text color={theme.whiteLight} fontSize={18} fontWeight="bold">Sair</Text>
         </TouchableOpacity>
       </VStack>
     );

@@ -36,7 +36,7 @@ export const CardapioDetalhe = ({ route }) => {
                 <VStack alignItems="center">
                   <Icon
                     as={<MaterialIcons name="star" />}
-                    size={8}
+                    size={7}
                     color={theme.orange}
                   />
                   <Text fontSize={14} fontWeight="bold" textAlign='center' color={theme.orange}>{dadosCardapio?.scoreRestaurant}</Text>
@@ -48,15 +48,15 @@ export const CardapioDetalhe = ({ route }) => {
                   <HStack alignItems="center">
                     <Icon
                       as={<MaterialIcons name="phone" />}
-                      size={7}
+                      size={6}
                       mr={1}
                       color={theme.orange}
                       onPress={() => Linking.openURL(`tel:${dadosCardapio?.telephoneRestaurant}`)}
                     />
-                    <Text fontSize={14} fontWeight="bold" textAlign='center' color={theme.darkColor}>{dadosCardapio?.telephoneRestaurant}</Text>
+                    <Text fontSize={12} fontWeight="bold" textAlign='center' color={theme.darkColor}>{dadosCardapio?.telephoneRestaurant}</Text>
                     <Icon
                       as={<MaterialCommunityIcons name="whatsapp" />}
-                      size={7}
+                      size={6}
                       ml={6}
                       mr={1}
                       color={theme.successColor}
@@ -66,24 +66,24 @@ export const CardapioDetalhe = ({ route }) => {
                         )
                       }
                     />
-                    <Text fontSize={14} fontWeight="bold" textAlign='center' color={theme.darkColor}>{dadosCardapio?.telephoneRestaurant}</Text>
+                    <Text fontSize={12} fontWeight="bold" textAlign='center' color={theme.darkColor}>{dadosCardapio?.telephoneRestaurant}</Text>
                   </HStack>
                   <HStack alignItems="center" pr={6}>
                     <Icon
                       as={<MaterialIcons name="location-pin" />}
-                      size={7}
+                      size={6}
                       mr={1}
                       color={theme.orange}
                     />
                     <Text fontSize={14} fontWeight="bold" ellipsizeMode="tail" numberOfLines={2} textAlign='left' color={theme.darkColor}>{dadosCardapio?.enderecoRestaurante}</Text>
                   </HStack>
                 </View>
-                <HStack>
+                <HStack justifyContent="space-between">
 
                   <HStack alignItems="center">
                     <Icon
                       as={<MaterialIcons name="access-time" />}
-                      size={7}
+                      size={6}
                       mr={1}
                       color={theme.orange}
                     />
@@ -92,7 +92,7 @@ export const CardapioDetalhe = ({ route }) => {
                   <HStack alignItems="center">
                     <Icon
                       as={<MaterialIcons name="confirmation-number" />}
-                      size={7}
+                      size={6}
                       ml={6}
                       mr={1}
                       color={theme.orange}
@@ -102,12 +102,12 @@ export const CardapioDetalhe = ({ route }) => {
                   <HStack alignItems="center">
                     <Icon
                       as={<MaterialIcons name="verified" />}
-                      size={7}
+                      size={6}
                       ml={6}
                       mr={1}
                       color={theme.successColor}
                     />
-                    <Text fontSize={14} fontWeight="bold" textAlign='center' color={theme.darkColor}>Verificado</Text>
+
                   </HStack>
                 </HStack>
               </VStack>

@@ -173,12 +173,12 @@ export const Login = () => {
                         />
                       }
                       mr={4}
-                      size={10}
+                      size={8}
                       color={salvarUsuario ? theme.successColor : theme.whiteLight}
 
                     />
                   </TouchableOpacity>
-                  <Text color={theme.whiteLight} fontSize={24} fontWeight="bold">Salvar Usuário</Text>
+                  <Text color={theme.whiteLight} fontSize={20} fontWeight="bold">Salvar Usuário</Text>
                 </HStack>
                 <Button
                   title="Entrar"

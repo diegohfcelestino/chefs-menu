@@ -8,7 +8,7 @@
   <a href="#-sobre">Sobre</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#-projeto">Projeto</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#-tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="https://api-restaurant-scxy.onrender.com/documentation/">Documentação Backend</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="https://api-restaurant-scxy.onrender.com/documentation/" target="_blank">Documentação Backend</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#-autor">Autor</a>
 </p>
 
@@ -17,7 +17,7 @@
 ## ✨ Sobre
 
 
-Projeto desenvolvido no desafio tecnico para vaga de Full Stack na empresa [Grão Direto](https://www.graodireto.com.br/).
+Projeto desenvolvido no desafio tecnico para vaga de Full Stack na empresa <a href="https://www.graodireto.com.br/" target="_blank">Grão Direto</a>.
 Informações do desafio:
 
 Suponha que você tenha sido solicitado a desenvolver uma plataforma no ramo de gastronomia. O cliente solicitou um MVP para validar seu conhecimento, 
@@ -74,7 +74,7 @@ Foi utilizado o Mongo Atlas, que alem de ser o banco MongoDB ele já fica em nuv
 <img src="./assets/swagger.png" width="200">
 </div>
 
-- [Backend](https://github.com/diegohfcelestino/desafio-tecnico-fullstack-graoDireto/tree/main/api-restaurante)
+- <a href="https://github.com/diegohfcelestino/desafio-tecnico-fullstack-graoDireto/tree/main/api-restaurante" target="_blank">Backend</a>
   
 O backend foi desenvolvido utilizando NodeJS, Express e o JWT para proteção de rotas. O projeto foi publicado no Rende, plataforma para fazer deploy com Node e nele possui as seguintes requisições/end points:
 
@@ -86,7 +86,7 @@ O backend foi desenvolvido utilizando NodeJS, Express e o JWT para proteção de
 - Buscar os cardápios por ID de um restaurante e apagar cardapios.
 
 
-Foi criada a documentação de todos os end points utilizando o Swagger, para ter acesso, basta clicar [aqui](https://api-restaurant-scxy.onrender.com/documentation/), ou copiar o link `https://api-restaurant-scxy.onrender.com/documentation/` e colar em seu navegador.
+Foi criada a documentação de todos os end points utilizando o Swagger, para ter acesso, basta clicar <a href="https://github.com/diegohfcelestino/desafio-tecnico-fullstack-graoDireto/tree/main/api-restaurante" target="_blank">aqui</a>, ou copiar o link `https://api-restaurant-scxy.onrender.com/documentation/` e colar em seu navegador.
 
 
 ### Mobile
@@ -94,9 +94,43 @@ Foi criada a documentação de todos os end points utilizando o Swagger, para te
 <img src="./assets/react.png" width="100">
 </div>
 
-- [Mobile](https://github.com/diegohfcelestino/desafio-tecnico-fullstack-graoDireto/tree/main/app_restaurante)
+- <a href="https://github.com/diegohfcelestino/desafio-tecnico-fullstack-graoDireto/tree/main/app_restaurante" target="_blank">Mobile</a>
 
 O aplicativo foi desenvolvido utilizando React-native, utilizado vector-icons para trabalhar com icones, crypto-js para proteger os dados, async-storage para login automático quando usuário salvar e navegação de telas com o native-stack.
+
+#### Telas e funcionalidades do aplicativo
+
+- Tela inicial com apresentação do app.
+- Cadastrar usuario.
+- Login com autenticação criptografada com a possibilidade do usuário salvar senha e entrar de forma automática.
+- Primeira tela do aplicativo traz todos os restaurantes cadastrados por ordem crescente de distancia.
+- Ao clicar no banner do restaurante a tela é direcionada para o cardápio.
+- Na tela do cardápio traz as informações de todos os prato, bebidas e sobremesas, com a possibilidade de entra no item ou adicionar no pedido.
+- Detalhe do cardápio, tras todas as informações do item e pode adicionar ao pedido.
+- Nas telas de cardápio e detalhe do cardápio, foi adicionado um menu lateral a direita, para facilitar a navegação.
+- Na tela de pesquisa ao entrar ela traz todos os restaurantes cadastrados, com a possibilidade de pesquisar.
+- Pedidos, nessa tela figa gravados os pedidos, podendo navegar até a tela de detalhe do item ou excluir o item do cardápio.
+- Os pedidos ficam salvos no storage do celular.
+- Tela de perfil, tras os dados do usuário e podem ser alterados também.
+- Foi utilizado o storage para salvar informações do usuário com email criptografado e token também.
+- Abaixo estão as telas do aplicativo.
+- 
+
+<div>
+<img src="./assets/home.png" width="150">
+<img src="./assets/cadastro.png" width="150">
+<img src="./assets/login.png" width="150">
+<img src="./assets/restaurantes.png" width="150">
+<img src="./assets/cardapio.png" width="150">
+</div>
+<div>
+<img src="./assets/detalhe-cardapio.png" width="150">
+<img src="./assets/pesquisa.png" width="150">
+<img src="./assets/pedidos.png" width="150">
+<img src="./assets/perfil.png" width="150">
+</div>
+
+
 
 
 ## 🧪 Tecnologias
@@ -112,15 +146,15 @@ O aplicativo foi desenvolvido utilizando React-native, utilizado vector-icons pa
 </div>
 
 
-- [Nodejs](https://nodejs.org/en/)
-- [Express](https://expressjs.com/pt-br/)
-- [React-native](https://reactnative.dev/)
-- [Javascript](https://www.javascript.com/)
-- [MongoDB](https://www.mongodb.com/)
-- [MD5](https://www.md5hashgenerator.com/)
-- [JWT](https://jwt.io/)
-- [Axios](https://axios-http.com/ptbr/docs/intro)
-- [Render](https://dashboard.render.com/)
+- <a href="https://nodejs.org/en/" target="_blank">Node</a>
+- <a href="https://expressjs.com/pt-br/" target="_blank">Express</a>
+- <a href="https://reactnative.dev/" target="_blank">React-native</a>
+- <a href="https://www.javascript.com/" target="_blank">Javascript</a>
+- <a href="https://www.mongodb.com/" target="_blank">MongoDB</a>
+- <a href="https://www.md5hashgenerator.com/" target="_blank">MD5</a>
+- <a href="https://jwt.io/" target="_blank">JWT</a>
+- <a href="https://axios-http.com/ptbr/docs/intro" target="_blank">Axios</a>
+- <a href="https://dashboard.render.com/" target="_blank">Render</a>
   
 
 

@@ -6,8 +6,10 @@ import HomeImg from '../assets/img/home.png';
 import theme from '../assets/theme';
 import { IconArrowRight } from '../utils/icons';
 
+
 export const Home = () => {
   const navigation = useNavigation();
+
   return (
     <View flex={1} >
       <Image
@@ -21,11 +23,11 @@ export const Home = () => {
       />
       <View>
         <View w="full" bgColor={theme.overlayColor} py={8} px={1}>
-          <Text textAlign="center" fontSize={52} pb={10} fontWeight="bold" color={theme.orange}>Chef's Menu</Text>
-          <Text textAlign="center" fontSize={24} fontWeight="bold" color={theme.whiteLight}>Os melhores restaurante da cidade!</Text>
+          <Text textAlign="center" fontSize={48} pb={2} fontWeight="bold" color={theme.orange}>Chef's Menu</Text>
+          <Text textAlign="center" fontSize={20} fontWeight="bold" color={theme.whiteLight}>Os melhores restaurante da cidade!</Text>
         </View>
       </View>
-      <View bgColor={theme.whiteLight} justifyContent="center" alignItems="center" size={20} rounded="full" position="absolute" bottom={5} right={5}>
+      <View bgColor={theme.whiteLight} justifyContent="center" alignItems="center" size={16} rounded="full" position="absolute" bottom={5} right={5}>
         <TouchableOpacity onPress={() => navigation.navigate("Login")} >
           <IconArrowRight color={theme.orange} />
         </TouchableOpacity>

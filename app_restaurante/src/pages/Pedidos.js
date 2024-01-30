@@ -8,18 +8,14 @@ import { Background } from "../components/background/Background";
 import { FooterMenu } from "../components/footerMenu/FooterMenu";
 import { Image } from "../components/image/image";
 import { useAppContext } from "../context/AppContext";
+import CryptoJS from 'crypto-js';
 
 export const Pedidos = ({ route }) => {
   const {
     navigation,
     loading,
     formUsuario,
-    setLoading,
-    openDrawer,
-    drawerView,
-    setColorDrawer,
     listaPedidos,
-    setListaPedidos,
     buscarListaPedidos,
     removerPedido
   } = useAppContext();
@@ -29,24 +25,28 @@ export const Pedidos = ({ route }) => {
 
   }
 
+  const somaTotalValores = listaPedidos?.map(item => parseFloat(item.value)).reduce((prev, curr) => prev + curr, 0);
+
   useEffect(() => {
     buscarListaPedidos();
   }, []);
 
-
-
   return (
     <View flex={1}>
-      <View w="100%" flex={1} pb={2}>
+      <View w="100%" flex={1}>
         <Background opacity={0.4} />
         <HStack w="100%" bgColor={theme.overlayColor} h={32} flex={1} justifyContent="space-between" position="absolute" alignItems="center" top={0} >
           <VStack flex={1} alignItems="center">
-            <Text fontSize={52} fontWeight="bold" color={theme.orange}>
+            <Text fontSize={36} fontWeight="bold" color={theme.orange}>
               Chef's Menu
             </Text>
-            <Text color={theme.whiteLight} fontSize={20} fontWeight="bold">
+            <Text color={theme.whiteLight} fontSize={10} fontWeight="bold">
               {`Olá ${formUsuario?.nome ? formUsuario?.nome : ""}, por aqui você vê seus pedidos.`}
             </Text>
+            <HStack justifyContent="flex-end" alignItems="center" pt={2}>
+              <Text fontSize={14} color={theme.whiteLight}>Valor Total do pedido: </Text>
+              <Text fontSize={16} color={theme.orange}>{`R$ ${somaTotalValores ? somaTotalValores?.toFixed(2).split(".").join(",") : "0,00"}`}</Text>
+            </HStack>
           </VStack>
         </HStack>
 
@@ -57,7 +57,7 @@ export const Pedidos = ({ route }) => {
           </View>
           :
 
-          <FlatList removeClippedSubviews={true} my={32} keyExtractor={item => item.id} flex={1} data={listaPedidos}
+          <FlatList removeClippedSubviews={true} mt={32} mb={16} keyExtractor={item => item.id} flex={1} data={listaPedidos}
             ListEmptyComponent={() =>
               <Center w="full" bgColor={theme.overlayColor} py={4} px={1} mt={32} rounded="xl">
                 <Text textAlign="center" fontSize={24} fontWeight="bold" color={theme.whiteLight}>Não há nenhum item cadastrado neste restaurante!</Text>
@@ -89,6 +89,7 @@ export const Pedidos = ({ route }) => {
                 </TouchableOpacity>
               </VStack>
             } />
+
 
 
 

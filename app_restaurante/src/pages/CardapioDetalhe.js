@@ -28,10 +28,9 @@ export const CardapioDetalhe = ({ route }) => {
     <View flex={1} bgColor={theme.grayLight}>
       <Drawer open={openDrawer} drawerContent={drawerView()}>
         <View w="100%" flex={1} pb={2} >
-          <VStack rounded="lg" pb={2} bgColor={theme.whiteLight} mt={2} mx={2} shadow={3}>
-
+          <VStack rounded="lg" pb={4} bgColor={theme.whiteLight} mt={2} mx={2} shadow={3}>
             <HStack mx={4}>
-              <Center justifyContent="space-evenly">
+              <Center justifyContent="space-evenly" py={2}>
                 <Image size={20} source={dadosCardapio?.avatarRestaurant ? { uri: dadosCardapio?.avatarRestaurant } : SemImagem} rounded="full" alt="Imagem do avatar" />
                 <VStack alignItems="center">
                   <Icon
@@ -39,7 +38,7 @@ export const CardapioDetalhe = ({ route }) => {
                     size={7}
                     color={theme.orange}
                   />
-                  <Text fontSize={14} fontWeight="bold" textAlign='center' color={theme.orange}>{dadosCardapio?.scoreRestaurant}</Text>
+                  <Text fontSize={12} fontWeight="bold" textAlign='center' color={theme.orange}>{dadosCardapio?.scoreRestaurant}</Text>
                 </VStack>
               </Center>
               <VStack flex={1} pl={4}>
@@ -53,7 +52,7 @@ export const CardapioDetalhe = ({ route }) => {
                       color={theme.orange}
                       onPress={() => Linking.openURL(`tel:${dadosCardapio?.telephoneRestaurant}`)}
                     />
-                    <Text fontSize={12} fontWeight="bold" textAlign='center' color={theme.darkColor}>{dadosCardapio?.telephoneRestaurant}</Text>
+                    <Text fontSize={10} fontWeight="bold" textAlign='center' color={theme.darkColor}>{dadosCardapio?.telephoneRestaurant}</Text>
                     <Icon
                       as={<MaterialCommunityIcons name="whatsapp" />}
                       size={6}
@@ -66,7 +65,7 @@ export const CardapioDetalhe = ({ route }) => {
                         )
                       }
                     />
-                    <Text fontSize={12} fontWeight="bold" textAlign='center' color={theme.darkColor}>{dadosCardapio?.telephoneRestaurant}</Text>
+                    <Text fontSize={10} fontWeight="bold" textAlign='center' color={theme.darkColor}>{dadosCardapio?.telephoneRestaurant}</Text>
                   </HStack>
                   <HStack alignItems="center" pr={6}>
                     <Icon
@@ -75,7 +74,7 @@ export const CardapioDetalhe = ({ route }) => {
                       mr={1}
                       color={theme.orange}
                     />
-                    <Text fontSize={14} fontWeight="bold" ellipsizeMode="tail" numberOfLines={2} textAlign='left' color={theme.darkColor}>{dadosCardapio?.enderecoRestaurante}</Text>
+                    <Text fontSize={12} fontWeight="bold" ellipsizeMode="tail" numberOfLines={2} textAlign='left' color={theme.darkColor}>{dadosCardapio?.enderecoRestaurante}</Text>
                   </HStack>
                 </View>
                 <HStack justifyContent="space-between">
@@ -87,7 +86,7 @@ export const CardapioDetalhe = ({ route }) => {
                       mr={1}
                       color={theme.orange}
                     />
-                    <Text fontSize={14} fontWeight="bold" textAlign='center' color={theme.darkColor}>{dadosCardapio?.tempoEntregaRestaurante}</Text>
+                    <Text fontSize={12} fontWeight="bold" textAlign='center' color={theme.darkColor}>{dadosCardapio?.tempoEntregaRestaurante}</Text>
                   </HStack>
                   <HStack alignItems="center">
                     <Icon
@@ -97,7 +96,7 @@ export const CardapioDetalhe = ({ route }) => {
                       mr={1}
                       color={theme.orange}
                     />
-                    <Text fontSize={14} fontWeight="bold" textAlign='center' color={theme.darkColor}>{`R$ ${dadosCardapio?.valorEntregaRestaurante}`}</Text>
+                    <Text fontSize={12} fontWeight="bold" textAlign='center' color={theme.darkColor}>{`R$ ${dadosCardapio?.valorEntregaRestaurante}`}</Text>
                   </HStack>
                   <HStack alignItems="center">
                     <Icon
@@ -113,17 +112,17 @@ export const CardapioDetalhe = ({ route }) => {
               </VStack>
             </HStack>
 
-          </VStack>
-          <VStack rounded="lg" py={2} bgColor={theme.whiteLight} mx={2} shadow={3}>
-            <Image resizeMode="cover" w="full" h={64} source={dadosCardapio.background ? { uri: dadosCardapio.background } : SemImagem} rounded="lg" alt="Imagem do cardápio" />
-            <View mx={2}>
-              <Text fontSize={22} fontWeight="bold" color={theme.orange}>{dadosCardapio?.name}</Text>
-              <Text my={4} fontSize={18} fontWeight="bold" color={theme.darkColor}>{dadosCardapio?.description}</Text>
-              <Text fontSize={18} fontWeight="bold" textAlign="right" color={theme.darkColor}>{`R$ ${dadosCardapio?.value}`}</Text>
 
-            </View>
-          </VStack>
+            <VStack rounded="lg" py={2} bgColor={theme.whiteLight} mx={2} shadow={3}>
+              <Image resizeMode="cover" w="full" h={56} source={dadosCardapio.background ? { uri: dadosCardapio.background } : SemImagem} rounded="lg" alt="Imagem do cardápio" />
+              <View mx={2}>
+                <Text fontSize={22} fontWeight="bold" color={theme.orange}>{dadosCardapio?.name}</Text>
+                <Text my={4} fontSize={18} fontWeight="bold" color={theme.darkColor}>{dadosCardapio?.description}</Text>
+                <Text fontSize={18} fontWeight="bold" textAlign="right" color={theme.darkColor}>{`R$ ${dadosCardapio?.value}`}</Text>
 
+              </View>
+            </VStack>
+          </VStack>
         </View>
         <Center>
           <Button

@@ -13,6 +13,7 @@ import { useAppContext } from "../context/AppContext";
 import { handlePost } from "../services/service";
 import { handleGetAsyncStorage, handleSetAsyncStorage } from "../services/storage";
 import { IconArrowLeft } from "../utils/icons";
+import { criptografarDados } from "../services/crypto";
 
 export const Login = () => {
   const {
@@ -29,7 +30,7 @@ export const Login = () => {
   } = useAppContext();
 
   async function salvarDadosStorage(dadosUsuario) {
-    dadosUsuario && handleSetAsyncStorage(dadosUsuario.token, dadosUsuario, formUsuario?.usuario, formUsuario?.senha);
+    dadosUsuario && handleSetAsyncStorage(dadosUsuario.token, dadosUsuario, criptografarDados(formUsuario?.usuario), criptografarDados(formUsuario?.senha));
   }
 
   async function login() {
@@ -37,8 +38,8 @@ export const Login = () => {
       const { emailStorage, senhaStorage } = await handleGetAsyncStorage();
       setLoading(true);
       const params = {
-        email: formUsuario?.usuario ? formUsuario?.usuario : emailStorage,
-        password: formUsuario?.senha ? formUsuario?.senha : senhaStorage,
+        email: formUsuario?.usuario ? criptografarDados(formUsuario?.usuario) : emailStorage,
+        password: formUsuario?.senha ? criptografarDados(formUsuario?.senha) : senhaStorage,
       };
       handlePost("auth", params).then(async (response) => {
         if (response.data.token) {

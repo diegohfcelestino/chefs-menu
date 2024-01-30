@@ -10,6 +10,7 @@ import { errorMessage, infoMessage, successMessage } from "../components/toast/T
 import { useAppContext } from "../context/AppContext";
 import { handlePost } from "../services/service";
 import { validaAvatar, validaConfirmaSenha, validaEmail, validaNome, validaNomeUsuario, validaSenha } from "../utils/validacoes";
+import { criptografarDados } from "../services/crypto";
 
 export const Cadastro = () => {
   const {
@@ -61,8 +62,8 @@ export const Cadastro = () => {
     const params = {
       name: formUsuario?.nome,
       username: formUsuario?.nomeUsuario,
-      email: formUsuario?.usuario,
-      password: formUsuario?.senha,
+      email: criptografarDados(formUsuario?.usuario),
+      password: criptografarDados(formUsuario?.senha),
       avatar: formUsuario?.avatar,
       background: formUsuario?.background
     };

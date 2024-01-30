@@ -89,12 +89,14 @@ O backend foi desenvolvido utilizando NodeJS, Express e o JWT para proteção de
 Foi criada a documentação de todos os end points utilizando o Swagger, para ter acesso, basta clicar [aqui](https://api-restaurant-scxy.onrender.com/documentation/), ou copiar o link `https://api-restaurant-scxy.onrender.com/documentation/` e colar em seu navegador.
 
 
-### Mobile  
+### Mobile
 <div>   
 <img src="./assets/react.png" width="100">
 </div>
 
-- [Mobile](https://github.com/diegohfcelestino/desafio-tecnico-fullstack-graoDireto/tree/main)
+- [Mobile](https://github.com/diegohfcelestino/desafio-tecnico-fullstack-graoDireto/tree/main/app_restaurante)
+
+O aplicativo foi desenvolvido utilizando React-native, utilizado vector-icons para trabalhar com icones, crypto-js para proteger os dados, async-storage para login automático quando usuário salvar e navegação de telas com o native-stack.
 
 
 ## 🧪 Tecnologias

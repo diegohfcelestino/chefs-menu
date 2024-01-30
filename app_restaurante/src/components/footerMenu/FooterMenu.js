@@ -44,7 +44,7 @@ export const FooterMenu = ({ color }) => {
               size={8}
               color={color === item.route ? theme.orange : theme.whiteLight}
             />
-            <Text color={color === item.route ? theme.orange : theme.whiteLight} fontSize={14}>{item.nome}</Text>
+            <Text color={color === item.route ? theme.orange : theme.whiteLight} fontSize={10}>{item.nome}</Text>
           </TouchableOpacity>
         </VStack>
       ))}

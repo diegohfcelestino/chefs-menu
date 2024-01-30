@@ -1,5 +1,4 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { HStack, Image, Text } from "native-base";
 import React from "react";
 import { RFValue } from "react-native-responsive-fontsize";
 import theme from "../assets/theme";
@@ -8,7 +7,7 @@ import { Home } from "../pages/Home";
 import { Login } from "../pages/Login";
 import { IconArrowLeft, IconCloseMenu, IconOpenMenu } from "../utils/icons";
 import { Cadastro } from "../pages/Cadastro";
-import { Restaurante, Restaurantes } from "../pages/Restaurantes";
+import { Restaurantes } from "../pages/Restaurantes";
 import { Pesquisar } from "../pages/Pesquisar";
 import { Perfil } from "../pages/Perfil";
 import { Cardapio } from "../pages/Cardapio";

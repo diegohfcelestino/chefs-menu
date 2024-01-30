@@ -107,7 +107,7 @@ export function AppProvider({ children }) {
         <TouchableOpacity onPress={() => sairDoAplicativo()} style={{ flexDirection: "row", alignItems: "center" }}>
           <Icon
             as={<FontAwesome name="sign-out" />}
-            size={10}
+            size={8}
             color={theme.dangerColor}
             mx={2}
           />

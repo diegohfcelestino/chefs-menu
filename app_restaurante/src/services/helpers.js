@@ -24,22 +24,6 @@ const modalConexao = () => {
   return true;
 };
 
-export function handleDateFormatIso(data) {
-  const newData = new Date(data);
-  return `${newData.getFullYear()}-${pad(newData.getMonth() + 1)}-${pad(newData.getDate())}T${pad(newData.getHours())}:${pad(newData.getMinutes())}:${pad(newData.getSeconds())}`;
-}
-
-export function formataMoeda(v) {
-  v = v?.toFixed(2);
-  v = v?.toString();
-  v = v?.replace(/\D/g, "");
-  v = v?.replace(/([0-9]{2})$/g, ",$1");
-  if (v?.length > 6) {
-    v = v?.replace(/([0-9]{3}),([0-9]{2}$)/g, ".$1,$2");
-  }
-  return v;
-}
-
 export function handleError(error, altMessage = "Ocorreu um erro durante o processo") {
   if (!error?.response) error = { response: { data: false, status: false } };
   const { data, status } = error?.response;

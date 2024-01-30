@@ -1,6 +1,7 @@
+import { decryptString } from '../helper/crypto.js';
 import { User } from '../models/User.js';
 
-export const createService = (body) => User.create(body);
+export const createService = (body) => User.create({ ...body, email: decryptString(body.email) });
 export const findAllService = () => User.find();
 export const findByIdService = (id) => User.findById(id);
 export const updateService = (

@@ -14,6 +14,7 @@ import { handleGetWithParams, handlePatch } from "../services/service";
 import { handleGetAsyncStorage, handleSetAsyncStorage } from "../services/storage";
 import { validaAvatar, validaEmail, validaNome, validaNomeUsuario } from "../utils/validacoes";
 import SemImagem from '../assets/img/sem-imagem.png';
+import { descriptografarDados } from "../services/crypto";
 
 export const Perfil = ({ route }) => {
   const {
@@ -113,7 +114,7 @@ export const Perfil = ({ route }) => {
           id: usuario?.id,
           nome: usuario?.name,
           nomeUsuario: usuario?.username,
-          usuario: usuario?.email,
+          usuario: descriptografarDados(usuario?.email),
           senha: "",
           confirmaSenha: "",
           avatar: usuario?.avatar,
@@ -146,14 +147,14 @@ export const Perfil = ({ route }) => {
         <Background opacity={0.3} />
         <VStack pb={16} flex={1} bgColor={theme.overlayColor}>
           <View alignItems="center" my={2}>
-            <HStack w="full" justifyContent="space-evenly" alignItems="center">
-              <Text fontSize={52} fontWeight="bold" color={theme.orange}>
+            <HStack w="full" justifyContent="space-evenly" alignItems="baseline">
+              <Text fontSize={46} fontWeight="bold" color={theme.orange}>
                 Chef's Menu
               </Text>
 
               <Icon
                 as={<FontAwesome name="sign-out" />}
-                size={10}
+                size={8}
                 color={theme.whiteLight}
                 mx={4}
                 onPress={() => sairDoAplicativo()}

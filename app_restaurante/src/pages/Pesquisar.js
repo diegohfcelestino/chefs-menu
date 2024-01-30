@@ -101,16 +101,16 @@ export const Pesquisar = ({ route }) => {
         {listaPesquisada.length > 0 &&
           <HStack mx={6} justifyContent="space-around" mb={4}>
             <TouchableOpacity onPress={() => filtrarLista()}>
-              <Text fontSize={20} color={color === "Todos" ? theme.orange : theme.whiteLight}>Todos</Text>
+              <Text fontSize={16} color={color === "Todos" ? theme.orange : theme.whiteLight}>Todos</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => filtrarLista("Pratos")}>
-              <Text fontSize={20} color={color === "Pratos" ? theme.orange : theme.whiteLight}>Pratos</Text>
+              <Text fontSize={16} color={color === "Pratos" ? theme.orange : theme.whiteLight}>Pratos</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => filtrarLista("Bebidas")}>
-              <Text fontSize={20} color={color === "Bebidas" ? theme.orange : theme.whiteLight}>Bebidas</Text>
+              <Text fontSize={16} color={color === "Bebidas" ? theme.orange : theme.whiteLight}>Bebidas</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => filtrarLista("Sobremesas")}>
-              <Text fontSize={20} color={color === "Sobremesas" ? theme.orange : theme.whiteLight}>Sobremesas</Text>
+              <Text fontSize={16} color={color === "Sobremesas" ? theme.orange : theme.whiteLight}>Sobremesas</Text>
             </TouchableOpacity>
           </HStack>
         }
@@ -134,7 +134,7 @@ export const Pesquisar = ({ route }) => {
               </Center>
             }
             renderSectionHeader={({ section }) => (
-              <Text textAlign="center" fontWeight="bold" fontSize={22} color={theme.orange}>{section.title}</Text>
+              <Text textAlign="center" fontWeight="bold" fontSize={16} color={theme.orange}>{section.title}</Text>
             )}
             renderItem={({ item, section }) =>
               <VStack flex={1} rounded="lg" pb={2} bgColor={theme.whiteLight} my={2} mx={2} shadow={3} >

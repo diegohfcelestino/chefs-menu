@@ -1,4 +1,4 @@
-<h1 align="center">Exercício Técnico – FULL STACK</h1>
+<h1 align="center">Chef's Menu</h1>
 
 <p align="center">
   <img src="./assets/home.png" width="250">

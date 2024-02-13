@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Restaurantes",
+    "title": "Chef's Menu",
     "description": "Aplicativo para pesquisa de restaurantes e pratos de sua cidade.",
     "contact": {
       "email": "diegohfcelestino@gmail.com"

@@ -9,6 +9,7 @@
   <a href="#-projeto">Projeto</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#-tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="https://api-restaurant-scxy.onrender.com/documentation/" target="_blank">Documentação Backend</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-proximos passos" target="_blank">Próximos passos</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#-autor">Autor</a>
 </p>
 
@@ -76,7 +77,7 @@ O backend foi desenvolvido utilizando NodeJS, Express e o JWT para proteção de
 - Buscar os cardápios por ID de um restaurante e apagar cardapios.
 
 
-Foi criada a documentação de todos os end points utilizando o Swagger, para ter acesso, basta clicar <a href="https://github.com/diegohfcelestino/chefs-menu/tree/main/api-restaurante" target="_blank">aqui</a>, ou copiar o link `https://api-restaurant-scxy.onrender.com/documentation/` e colar em seu navegador.
+Foi criada a documentação de todos os end points utilizando o Swagger, para ter acesso, basta clicar <a href="https://api-restaurant-scxy.onrender.com/documentation/" target="_blank">aqui</a>, ou copiar o link `https://api-restaurant-scxy.onrender.com/documentation/` e colar em seu navegador.
 
 
 ### Mobile
@@ -104,7 +105,7 @@ O aplicativo foi desenvolvido utilizando React-native, utilizado vector-icons pa
 - Tela de perfil, tras os dados do usuário e podem ser alterados também.
 - Foi utilizado o storage para salvar informações do usuário com email criptografado e token também.
 - Abaixo estão as telas do aplicativo.
-- 
+
 
 <div>
 <img src="./assets/home.png" width="150">
@@ -148,14 +149,29 @@ O aplicativo foi desenvolvido utilizando React-native, utilizado vector-icons pa
   
 
 
+## ✨ Próximos passos
 
-O projeto pode ser clonado e executado localmente.
+Para o aplicativo
+- Adicionar tela de fechamento de pedidos/pagamentos.
+- Adicionar leitura de cartão de crédito via NFC.
+- Concluir pedido e solicitação do mesmo.
+- Acompanhar entrega do item.
+
+Criar projeto Web para o logista.
+
+- Acompanhar pedidos solicitados.
+- Aprovar pedido e já começar a produção do mesmo.
+- Finalizar produção e chamar o entregador/finalizar pedido.
+
+
+
+### O projeto pode ser clonado e executado localmente.
 
 
 
 ## ✨ Autor
 
-Feito com amor por **Diego Henrique Ferreira Celestino** seguindo o desafio técnico.
+Feito com amor por **Diego Henrique Ferreira Celestino**.
 Entre em contato!
 
 [![Github Badge](https://img.shields.io/badge/-Github-000?style=flat-square&logo=Github&logoColor=white&link=link_do_seu_perfil_no_github)](https://github.com/diegohfcelestino)

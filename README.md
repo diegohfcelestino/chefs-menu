@@ -1,7 +1,7 @@
 <h1 align="center">Exercício Técnico – FULL STACK</h1>
 
 <p align="center">
-  <img src="./assets/exercicio.png" width="700">
+  <img src="./assets/home.png" width="250">
 </p>
 
 <p align="center">
@@ -17,33 +17,23 @@
 ## ✨ Sobre
 
 
-Projeto desenvolvido no desafio tecnico para vaga de Full Stack na empresa <a href="https://www.graodireto.com.br/" target="_blank">Grão Direto</a>.
-Informações do desafio:
+Projeto desenvolvido para estudo e pratica para Full Stack.
 
-Suponha que você tenha sido solicitado a desenvolver uma plataforma no ramo de gastronomia. O cliente solicitou um MVP para validar seu conhecimento, 
-com as seguintes características:
+Informações do projeto:
 
-- Um portal WEB responsivo ou aplicativo mobile;
+- Um portal WEB responsivo e aplicativo mobile;
 - Autenticação por e-mail e senha criptografados;
 - Tela inicial com uma lista dos restaurantes;
-- A tela deve possuir um campo de busca livre, que filtra os restaurantes cujo NOME DO RESTAURANTE, NOME E DESCRIÇÃO DO PRATO possuam os caracteres digitados;
-- Ao clicar em um restaurante na lista, a plataforma deve ir para a tela de detalhe do restaurante e cardápio;
+- A tela possui um campo de busca livre, que filtra os restaurantes cujo NOME DO RESTAURANTE, NOME E DESCRIÇÃO DO PRATO possuam os caracteres digitados;
+- Ao clicar em um restaurante na lista, a plataforma leva para a tela de detalhe do restaurante e cardápio;
 - Tela com detalhe do restaurante, mostrando nome, telefone e endereço, além da lista de itens do cardápio (nome, descrição e preço)
 
-Desenvolva o MVP solicitado, em qualquer tecnologia, respeitando os seguintes critérios: 
 
-- Portal ou aplicativo; 
-- Tela de login e autenticação (criar um usuário "fred@graodireto.com.br e senha "123Fred"); 
+Para teste já possui:
+
+- Usuario "teste@teste.com.br e senha "123Teste"; 
 - Backend respondendo a chamadas API REST; 
 - Repositório de dados contendo informações dos usuários, restaurantes e itens do cardápio;
-
-
-<h2 align="center">Abaixo está o exemplo enviado no desafio</h2>
-
-<p align="center">
-  <img src="./assets/exemplo.png" width="700">
-</p>
-
 
 ## ✨ Projeto
 <!-- <p align="center">
@@ -74,7 +64,7 @@ Foi utilizado o Mongo Atlas, que alem de ser o banco MongoDB ele já fica em nuv
 <img src="./assets/swagger.png" width="200">
 </div>
 
-- <a href="https://github.com/diegohfcelestino/desafio-tecnico-fullstack-graoDireto/tree/main/api-restaurante" target="_blank">Backend</a>
+- <a href="https://github.com/diegohfcelestino/chefs-menu/tree/main/api-restaurante" target="_blank">Backend</a>
   
 O backend foi desenvolvido utilizando NodeJS, Express e o JWT para proteção de rotas. O projeto foi publicado no Rende, plataforma para fazer deploy com Node e nele possui as seguintes requisições/end points:
 
@@ -86,7 +76,7 @@ O backend foi desenvolvido utilizando NodeJS, Express e o JWT para proteção de
 - Buscar os cardápios por ID de um restaurante e apagar cardapios.
 
 
-Foi criada a documentação de todos os end points utilizando o Swagger, para ter acesso, basta clicar <a href="https://github.com/diegohfcelestino/desafio-tecnico-fullstack-graoDireto/tree/main/api-restaurante" target="_blank">aqui</a>, ou copiar o link `https://api-restaurant-scxy.onrender.com/documentation/` e colar em seu navegador.
+Foi criada a documentação de todos os end points utilizando o Swagger, para ter acesso, basta clicar <a href="https://github.com/diegohfcelestino/chefs-menu/tree/main/api-restaurante" target="_blank">aqui</a>, ou copiar o link `https://api-restaurant-scxy.onrender.com/documentation/` e colar em seu navegador.
 
 
 ### Mobile
@@ -94,7 +84,7 @@ Foi criada a documentação de todos os end points utilizando o Swagger, para te
 <img src="./assets/react.png" width="100">
 </div>
 
-- <a href="https://github.com/diegohfcelestino/desafio-tecnico-fullstack-graoDireto/tree/main/app_restaurante" target="_blank">Mobile</a>
+- <a href="https://github.com/diegohfcelestino/chefs-menu/tree/main/app_restaurante" target="_blank">Mobile</a>
 
 O aplicativo foi desenvolvido utilizando React-native, utilizado vector-icons para trabalhar com icones, crypto-js para proteger os dados, async-storage para login automático quando usuário salvar e navegação de telas com o native-stack.
 
